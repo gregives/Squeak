@@ -12,6 +12,8 @@
   "dependencies": {
     "core-js": "^2.6.5",
     "nw": "^0.39.1-sdk",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-vue": "^0.8.1",
     "vue": "^2.6.10",
     "vue-router": "^3.0.3",
     "vuex": "^3.0.1"

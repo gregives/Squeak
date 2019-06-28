@@ -6,9 +6,9 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "nw": "node_modules/.bin/nw ."
+    "nw": "npx nw ."
   },
-  "main": "http://localhost:8080",
+  "main": "localhost:8080",
   "dependencies": {
     "core-js": "^2.6.5",
     "nw": "^0.39.1-sdk",

@@ -3,13 +3,3 @@
     <router-view></router-view>
   </div>
 </template>
-
-<script>
-  export default {
-    name: 'autoclicker'
-  }
-</script>
-
-<style>
-  /* CSS */
-</style>

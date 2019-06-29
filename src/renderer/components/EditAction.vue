@@ -3,9 +3,15 @@
     <h6 slot="header" class="mb-0">
       Edit Action
       <div class="float-right">
-        <b-button size="sm">^</b-button>
-        <b-button size="sm">v</b-button>
-        <b-button variant="danger" size="sm">D</b-button>
+        <b-button size="sm">
+          <font-awesome-icon icon="caret-up"/>
+        </b-button>
+        <b-button size="sm">
+          <font-awesome-icon icon="caret-down"/>
+        </b-button>
+        <b-button variant="danger" size="sm">
+          <font-awesome-icon icon="trash"/>
+        </b-button>
       </div>
     </h6>
   </b-card>

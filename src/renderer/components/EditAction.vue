@@ -23,10 +23,10 @@ export default {
   name: 'edit-action',
   computed: {
     selected () {
-      return this.$store.state.Actions.selected
+      return this.$store.state.ActionList.selected
     },
     action () {
-      return this.$store.state.Actions.actions[this.selected]
+      return this.$store.state.ActionList.actions[this.selected]
     }
   },
   methods: {

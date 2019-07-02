@@ -1,26 +1,5 @@
 const state = {
-  actions: [
-    {
-      type: 'Click',
-      value: '123, 456',
-      label: ''
-    },
-    {
-      type: 'Click',
-      value: '300ms',
-      label: ''
-    },
-    {
-      action: 'Right click',
-      value: '345, 678',
-      label: ''
-    },
-    {
-      action: 'Left click',
-      value: '456, 789',
-      label: ''
-    }
-  ],
+  actions: [],
   selected: null
 }
 
@@ -29,7 +8,8 @@ const mutations = {
     state.selected = index
   },
   CREATE_ACTION (state, { action }) {
-    state.actions.push(action)
+    state.actions.splice(state.selected + 1, 0, action)
+    state.selected += 1
   },
   DELETE_ACTION (state, { index }) {
     state.actions.splice(index, 1)

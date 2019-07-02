@@ -6,11 +6,11 @@
           <b-dropdown-item href="#">Play from beginning</b-dropdown-item>
           <b-dropdown-item href="#">Play from selected</b-dropdown-item>
         </b-dropdown>
-        <b-dropdown split text="Play" variant="success" class="mr-2">
+        <b-dropdown split text="Play" variant="success" class="mr-2" @click="startPlayback">
           <b-dropdown-item href="#">Play from beginning</b-dropdown-item>
           <b-dropdown-item href="#">Play from selected</b-dropdown-item>
         </b-dropdown>
-        <b-dropdown split text="Stop" variant="info">
+        <b-dropdown split text="Stop" variant="info" @click="pausePlayback">
           <b-dropdown-item href="#">Play from beginning</b-dropdown-item>
           <b-dropdown-item href="#">Play from selected</b-dropdown-item>
         </b-dropdown>
@@ -18,6 +18,13 @@
     </b-col>
     <b-col cols="auto">
       <div class="bg-white border-bottom border-right shadow-sm p-4">
+        <b-button @click="addClick">Mouse</b-button>
+        <b-button>Key</b-button>
+        <b-button>Text</b-button>
+        <b-button>Wait</b-button>
+        <small class="position-absolute text-muted bottom-left text-center w-100">
+          New Action
+        </small>
       </div>
     </b-col>
     <b-col>
@@ -27,22 +34,23 @@
 </template>
 
 <script>
-const robot = require('robotjs')
-robot.setMouseDelay(2)
-
-const twoPI = Math.PI * 2.0
-const screenSize = robot.getScreenSize()
-const height = (screenSize.height / 2) - 10
-const width = screenSize.width
+import ActionDefinitions from './ActionDefinitions'
 
 export default {
   name: 'header-controls',
   methods: {
-    testMouse () {
-      for (let x = 0; x < width; x++) {
-        const y = height * Math.sin((twoPI * x) / width) + height
-        robot.moveMouse(x, y)
-      }
+    addClick () {
+      this.$store.dispatch('CREATE_ACTION', {
+        action: ActionDefinitions.CLICK
+      })
+    },
+    startPlayback () {
+      this.$store.dispatch('START_PLAYBACK', {
+        index: 0
+      })
+    },
+    pausePlayback () {
+      this.$store.dispatch('PAUSE_PLAYBACK')
     }
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <b-card no-body class="shadow-sm border-secondary">
+  <b-card no-body class="shadow-sm">
     <b-table
       hover
       bordered
@@ -8,7 +8,7 @@
       @row-clicked="rowClicked"
       show-empty
     >
-      <template slot="empty" slot-scope="emptyHtml">
+      <template slot="empty">
         <h4>Click to add an action</h4>
       </template>
     </b-table>
@@ -20,10 +20,11 @@ export default {
   name: 'action-table',
   computed: {
     selected () {
-      return this.$store.state.Actions.selected
+      return this.$store.state.ActionList.selected
     },
     actions () {
-      return this.$store.state.Actions.actions.map((action, index) => {
+      console.log(this.$store.state.ActionList.actions)
+      return this.$store.state.ActionList.actions.map((action, index) => {
         return {
           ...action,
           index,

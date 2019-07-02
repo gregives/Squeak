@@ -16,10 +16,12 @@
         </b-dropdown>
       </div>
     </b-col>
-    <b-col>
-      <div class="bg-white border-bottom shadow-sm p-4">
-        <b-button @click="testMouse">Test mouse</b-button>
+    <b-col cols="auto">
+      <div class="bg-white border-bottom border-right shadow-sm p-4">
       </div>
+    </b-col>
+    <b-col>
+      <div class="bg-white border-bottom shadow-sm p-4"></div>
     </b-col>
   </b-row>
 </template>
@@ -45,3 +47,8 @@ export default {
   }
 }
 </script>
+
+<style scoped lang="sass">
+.row > div > div
+  height: 100%
+</style>

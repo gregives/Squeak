@@ -34,14 +34,13 @@
 </template>
 
 <script>
-import ActionDefinitions from './ActionDefinitions'
+import ActionClick from './actions/Click'
 
 export default {
-  name: 'header-controls',
   methods: {
     addClick () {
       this.$store.dispatch('CREATE_ACTION', {
-        action: ActionDefinitions.CLICK
+        action: ActionClick.methods.defaultAction()
       })
     },
     startPlayback () {

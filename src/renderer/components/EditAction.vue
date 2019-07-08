@@ -14,13 +14,14 @@
         </b-button>
       </div>
     </h6>
-    {{ action }}
+    <component :is="action ? action.name : null" :action="action"></component>
   </b-card>
 </template>
 
 <script>
+import ActionClick from './actions/Click'
+
 export default {
-  name: 'edit-action',
   computed: {
     selected () {
       return this.$store.state.ActionList.selected
@@ -45,6 +46,9 @@ export default {
         index: this.selected
       })
     }
+  },
+  components: {
+    ActionClick
   }
 }
 </script>
@@ -53,4 +57,7 @@ export default {
 .card-header .float-right
   margin-top: -6.5px
   margin-bottom: -6.5px
+
+.form-group:last-of-type
+  margin-bottom: 0
 </style>

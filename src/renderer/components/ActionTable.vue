@@ -17,13 +17,11 @@
 
 <script>
 export default {
-  name: 'action-table',
   computed: {
     selected () {
       return this.$store.state.ActionList.selected
     },
     actions () {
-      console.log(this.$store.state.ActionList.actions)
       return this.$store.state.ActionList.actions.map((action, index) => {
         return {
           ...action,

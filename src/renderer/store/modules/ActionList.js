@@ -16,7 +16,7 @@ const mutations = {
     state.selected = Math.min(state.selected, state.actions.length - 1)
   },
   UPDATE_ACTION (state, { index, action }) {
-    state.actions[index] = Object.assign({}, state.actions[index], action)
+    state.actions.splice(index, 1, action)
   },
   MOVE_ACTION_UP (state, { index }) {
     if (index === 0) {

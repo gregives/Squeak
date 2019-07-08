@@ -20,7 +20,6 @@ import ActionTable from '@/components/ActionTable'
 import EditAction from '@/components/EditAction'
 
 export default {
-  name: 'main-page',
   components: {
     HeaderControls,
     ActionTable,

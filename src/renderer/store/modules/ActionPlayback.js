@@ -6,10 +6,12 @@ const mutations = {
   START_PLAYBACK (state, { index, actions }) {
     state.playing = true
     let nextAction = index
-    do {
-      nextAction = actions[nextAction].play() || nextAction + 1
+    actions[nextAction].play(function finishedPlay (nextAction) {
       state.playing = nextAction < actions.length
-    } while (state.playing)
+      if (state.playing) {
+        actions[nextAction].play(finishedPlay)
+      }
+    })
   },
   PAUSE_PLAYBACK (state) {
     state.playing = false

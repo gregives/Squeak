@@ -20,6 +20,9 @@
 
 <script>
 import ActionClick from './actions/Click'
+import ActionKey from './actions/Key'
+import ActionMove from './actions/Move'
+import ActionWheel from './actions/Wheel'
 
 export default {
   computed: {
@@ -48,7 +51,10 @@ export default {
     }
   },
   components: {
-    ActionClick
+    ActionClick,
+    ActionKey,
+    ActionMove,
+    ActionWheel
   }
 }
 </script>

@@ -2,20 +2,25 @@
   <form>
     <b-form-group label="Button">
       <b-form-select v-model="editAction.button" @change="updateAction">
-        <option value="left">Left click</option>
-        <option value="right">Right click</option>
-        <option value="middle">Middle click</option>
+        <option value="left">Left</option>
+        <option value="right">Right</option>
+        <option value="middle">Middle</option>
       </b-form-select>
     </b-form-group>
-    <b-form-group>
-      <b-form-checkbox v-model="editAction.doubleClick" @change="updateAction">
-        Double click
-      </b-form-checkbox>
+    <b-form-group label="Click type">
+      <b-form-select v-model="editAction.type" @change="updateAction">
+        <option value="click">Single click</option>
+        <option value="double">Double click</option>
+        <option value="down">Button down</option>
+        <option value="up">Button up</option>
+      </b-form-select>
     </b-form-group>
   </form>
 </template>
 
 <script>
+const robot = require('robotjs')
+
 export default {
   props: {
     action: Object
@@ -33,9 +38,14 @@ export default {
       return {
         name: 'action-click',
         button: 'left',
-        doubleClick: false,
-        play () {
-          console.log(this)
+        type: 'click',
+        play (callback) {
+          if (this.type === 'click' || this.type === 'double') {
+            robot.mouseClick(this.button, this.type === 'double')
+          } else {
+            robot.mouseToggle(this.type, this.button)
+          }
+          callback()
         }
       }
     },

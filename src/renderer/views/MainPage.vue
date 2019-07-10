@@ -3,10 +3,10 @@
     <header-controls></header-controls>
     <b-container fluid class="p-4">
       <b-row>
-        <b-col cols="7">
+        <b-col cols="8">
           <action-table></action-table>
         </b-col>
-        <b-col cols="5">
+        <b-col cols="4">
           <edit-action></edit-action>
         </b-col>
       </b-row>

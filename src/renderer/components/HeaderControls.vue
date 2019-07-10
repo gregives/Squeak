@@ -18,10 +18,10 @@
     </b-col>
     <b-col cols="auto">
       <div class="bg-white border-bottom border-right shadow-sm p-4">
-        <b-button @click="addClick">Mouse</b-button>
-        <b-button>Key</b-button>
-        <b-button>Text</b-button>
-        <b-button>Wait</b-button>
+        <b-button @click="addClick">Click</b-button>
+        <b-button @click="addWheel">Wheel</b-button>
+        <b-button @click="addMove">Move</b-button>
+        <b-button @click="addKey">Key</b-button>
         <small class="position-absolute text-muted bottom-left text-center w-100">
           New Action
         </small>
@@ -35,6 +35,9 @@
 
 <script>
 import ActionClick from './actions/Click'
+import ActionWheel from './actions/Wheel'
+import ActionMove from './actions/Move'
+import ActionKey from './actions/Key'
 
 export default {
   methods: {
@@ -43,7 +46,23 @@ export default {
         action: ActionClick.methods.defaultAction()
       })
     },
+    addWheel () {
+      this.$store.dispatch('CREATE_ACTION', {
+        action: ActionWheel.methods.defaultAction()
+      })
+    },
+    addMove () {
+      this.$store.dispatch('CREATE_ACTION', {
+        action: ActionMove.methods.defaultAction()
+      })
+    },
+    addKey () {
+      this.$store.dispatch('CREATE_ACTION', {
+        action: ActionKey.methods.defaultAction()
+      })
+    },
     startPlayback () {
+      this.$electron.remote.BrowserWindow.getFocusedWindow().minimize()
       this.$store.dispatch('START_PLAYBACK', {
         index: 0
       })

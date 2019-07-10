@@ -1,6 +1,45 @@
 'use strict'
 
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, ipcMain } from 'electron'
+import actionFunctions from './actions.js'
+
+/**
+* Control playing of actions, from server-side Node.js
+*/
+(function () {
+  let playing = false
+
+  // Start playback from Vue
+  ipcMain.on('START_PLAYBACK', (event, actions, index) => {
+    // Minimize window
+    BrowserWindow.getFocusedWindow().minimize()
+    // Set playing to true
+    playing = true
+
+    let nextAction = actions[index]
+    let actionFunction = actionFunctions[nextAction.action]
+
+    actionFunction(nextAction, function finishedPlay (goTo) {
+      // Get next action index
+      index = goTo || index + 1
+      playing = playing && index < actions.length
+
+      if (playing) {
+        // Next action and its function
+        nextAction = actions[index]
+        actionFunction = actionFunctions[nextAction.action]
+
+        // Play the next action
+        actionFunction(nextAction, finishedPlay)
+      }
+    })
+  })
+
+  // Pause/stop playback
+  ipcMain.on('PAUSE_PLAYBACK', (event) => {
+    playing = false
+  })
+})()
 
 /**
  * Set `__static` path to static files in production

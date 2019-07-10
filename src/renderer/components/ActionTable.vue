@@ -19,10 +19,10 @@
 export default {
   computed: {
     selected () {
-      return this.$store.state.ActionList.selected
+      return this.$store.state.Actions.selected
     },
     actions () {
-      return this.$store.state.ActionList.actions.map((action, index) => {
+      return this.$store.state.Actions.actions.map((action, index) => {
         return {
           ...action,
           index,

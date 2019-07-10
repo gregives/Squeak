@@ -14,7 +14,7 @@
         </b-button>
       </div>
     </h6>
-    <component :is="action ? action.name : null" :action="action"></component>
+    <component :is="action ? `action-${action.action}` : null" :action="action"></component>
   </b-card>
 </template>
 
@@ -27,10 +27,10 @@ import ActionWheel from './actions/Wheel'
 export default {
   computed: {
     selected () {
-      return this.$store.state.ActionList.selected
+      return this.$store.state.Actions.selected
     },
     action () {
-      return this.$store.state.ActionList.actions[this.selected]
+      return this.$store.state.Actions.actions[this.selected]
     }
   },
   methods: {

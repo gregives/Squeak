@@ -39,7 +39,17 @@ import ActionWheel from './actions/Wheel'
 import ActionMove from './actions/Move'
 import ActionKey from './actions/Key'
 
+const { ipcRenderer } = require('electron')
+
 export default {
+  computed: {
+    selected () {
+      return this.$store.state.Actions.selected
+    },
+    actions () {
+      return this.$store.state.Actions.actions
+    }
+  },
   methods: {
     addClick () {
       this.$store.dispatch('CREATE_ACTION', {
@@ -62,10 +72,7 @@ export default {
       })
     },
     startPlayback () {
-      this.$electron.remote.BrowserWindow.getFocusedWindow().minimize()
-      this.$store.dispatch('START_PLAYBACK', {
-        index: 0
-      })
+      ipcRenderer.send('START_PLAYBACK', this.actions, 0)
     },
     pausePlayback () {
       this.$store.dispatch('PAUSE_PLAYBACK')

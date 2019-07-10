@@ -19,8 +19,6 @@
 </template>
 
 <script>
-const robot = require('robotjs')
-
 export default {
   props: {
     action: Object
@@ -30,23 +28,15 @@ export default {
       return { ...this.action }
     },
     selected () {
-      return this.$store.state.ActionList.selected
+      return this.$store.state.Actions.selected
     }
   },
   methods: {
     defaultAction () {
       return {
-        name: 'action-click',
+        action: 'click',
         button: 'left',
-        type: 'click',
-        play (callback) {
-          if (this.type === 'click' || this.type === 'double') {
-            robot.mouseClick(this.button, this.type === 'double')
-          } else {
-            robot.mouseToggle(this.type, this.button)
-          }
-          callback()
-        }
+        type: 'click'
       }
     },
     updateAction () {

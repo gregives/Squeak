@@ -14,8 +14,6 @@
 </template>
 
 <script>
-const robot = require('robotjs')
-
 export default {
   props: {
     action: Object
@@ -25,23 +23,15 @@ export default {
       return { ...this.action }
     },
     selected () {
-      return this.$store.state.ActionList.selected
+      return this.$store.state.Actions.selected
     }
   },
   methods: {
     defaultAction () {
       return {
-        name: 'action-key',
+        action: 'key',
         key: 'enter',
-        type: 'press',
-        play (callback) {
-          if (this.type === 'press') {
-            robot.keyTap(this.key)
-          } else {
-            robot.keyToggle(this.key, this.type)
-          }
-          callback()
-        }
+        type: 'press'
       }
     },
     updateAction () {

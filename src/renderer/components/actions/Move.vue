@@ -19,11 +19,6 @@
 </template>
 
 <script>
-const robot = require('robotjs')
-function animationFrame (fun) {
-  setImmediate(() => fun(Date.now()))
-}
-
 export default {
   props: {
     action: Object
@@ -33,39 +28,18 @@ export default {
       return { ...this.action }
     },
     selected () {
-      return this.$store.state.ActionList.selected
+      return this.$store.state.Actions.selected
     }
   },
   methods: {
     defaultAction () {
       return {
-        name: 'action-move',
+        action: 'move',
         position: {
           x: 0,
           y: 0
         },
-        duration: 0,
-        play (callback) {
-          if (this.duration === 0) {
-            robot.moveMouse(this.position.x, this.position.y)
-          } else {
-            const startPosition = robot.getMousePos()
-            let startTimestamp
-            animationFrame(function moveMouse (timestamp) {
-              startTimestamp = startTimestamp || timestamp
-              const ratio = (timestamp - startTimestamp) / this.duration
-              if (ratio < 1) {
-                const x = (this.position.x - startPosition.x) * ratio + startPosition.x
-                const y = (this.position.y - startPosition.y) * ratio + startPosition.y
-                robot.moveMouse(x, y)
-                animationFrame(moveMouse.bind(this))
-              } else {
-                robot.moveMouse(this.position.x, this.position.y)
-                callback()
-              }
-            }.bind(this))
-          }
-        }
+        duration: 0
       }
     },
     updateAction () {

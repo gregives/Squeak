@@ -10,8 +10,6 @@
 </template>
 
 <script>
-const robot = require('robotjs')
-
 export default {
   props: {
     action: Object
@@ -21,20 +19,16 @@ export default {
       return { ...this.action }
     },
     selected () {
-      return this.$store.state.ActionList.selected
+      return this.$store.state.Actions.selected
     }
   },
   methods: {
     defaultAction () {
       return {
-        name: 'action-wheel',
+        action: 'wheel',
         scroll: {
           x: 0,
           y: 0
-        },
-        play (callback) {
-          robot.scrollMouse(this.scroll.x, this.scroll.y)
-          callback()
         }
       }
     },

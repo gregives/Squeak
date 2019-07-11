@@ -23,8 +23,15 @@ export default {
     callback()
   },
   move (action, callback) {
+    const endPosition = {
+      x: Math.floor(Math.random() *
+        (action.firstPosition.x - action.secondPosition.x + 1)) + action.secondPosition.x,
+      y: Math.floor(Math.random() *
+        (action.firstPosition.y - action.secondPosition.y + 1)) + action.secondPosition.y
+    }
+
     if (action.duration === 0) {
-      robot.moveMouse(action.position.x, action.position.y)
+      robot.moveMouse(endPosition.x, endPosition.y)
     } else {
       const startPosition = robot.getMousePos()
       let startTimestamp
@@ -32,12 +39,12 @@ export default {
         startTimestamp = startTimestamp || timestamp
         const ratio = (timestamp - startTimestamp) / action.duration
         if (ratio < 1) {
-          const x = (action.position.x - startPosition.x) * ratio + startPosition.x
-          const y = (action.position.y - startPosition.y) * ratio + startPosition.y
+          const x = (endPosition.x - startPosition.x) * ratio + startPosition.x
+          const y = (endPosition.y - startPosition.y) * ratio + startPosition.y
           robot.moveMouse(x, y)
           animationFrame(moveMouse.bind(action))
         } else {
-          robot.moveMouse(action.position.x, action.position.y)
+          robot.moveMouse(endPosition.x, endPosition.y)
           callback()
         }
       })

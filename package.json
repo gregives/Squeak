@@ -19,6 +19,21 @@
     "postinstall": "npm run lint:fix",
     "rebuild": "npm rebuild --runtime=electron --target=2.0.18 --disturl=https://atom.io/download/atom-shell --abi=44"
   },
+  "iohook": {
+    "targets": [
+      "node-57",
+      "electron-57"
+    ],
+    "platforms": [
+      "win32",
+      "darwin",
+      "linux"
+    ],
+    "arches": [
+      "x64",
+      "ia32"
+    ]
+  },
   "build": {
     "productName": "autoclicker",
     "appId": "com.gregives.autoclicker",
@@ -60,6 +75,7 @@
     "axios": "^0.18.0",
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.0-rc.24",
+    "iohook": "^0.5.0",
     "robotjs": "^0.5.1",
     "vue": "^2.6.10",
     "vue-electron": "^1.0.6",

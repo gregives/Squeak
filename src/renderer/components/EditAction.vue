@@ -64,6 +64,6 @@ export default {
   margin-top: -6.5px
   margin-bottom: -6.5px
 
-.form-group:last-of-type
+form > .form-group:last-of-type
   margin-bottom: 0
 </style>

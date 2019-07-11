@@ -22,7 +22,7 @@
         <b-button @click="addWheel">Wheel</b-button>
         <b-button @click="addMove">Move</b-button>
         <b-button @click="addKey">Key</b-button>
-        <small class="position-absolute text-muted bottom-left text-center w-100">
+        <small class="position-absolute text-muted bottom-left text-center mb-1 w-100">
           New Action
         </small>
       </div>

@@ -26,7 +26,7 @@ export default {
         return {
           ...action,
           index,
-          _rowVariant: index === this.selected ? 'secondary' : null
+          _rowVariant: index === this.selected ? 'primary' : null
         }
       })
     }

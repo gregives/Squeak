@@ -22,6 +22,9 @@ export default {
     }
     callback()
   },
+  wait (action, callback) {
+    setTimeout(callback, action.wait)
+  },
   move (action, callback) {
     const endPosition = {
       x: Math.floor(Math.random() *

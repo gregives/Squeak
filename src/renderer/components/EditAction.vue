@@ -1,5 +1,5 @@
 <template>
-  <b-card>
+  <b-card class="shadow">
     <h6 slot="header" class="mb-0">
       Edit Action
       <div class="float-right">
@@ -23,6 +23,7 @@ import ActionClick from './actions/Click'
 import ActionKey from './actions/Key'
 import ActionMove from './actions/Move'
 import ActionWheel from './actions/Wheel'
+import ActionWait from './actions/Wait'
 
 export default {
   computed: {
@@ -54,7 +55,8 @@ export default {
     ActionClick,
     ActionKey,
     ActionMove,
-    ActionWheel
+    ActionWheel,
+    ActionWait
   }
 }
 </script>

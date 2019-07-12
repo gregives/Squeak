@@ -2,10 +2,6 @@
   <b-row no-gutters>
     <b-col cols="auto">
       <div class="bg-white border-bottom border-right shadow-sm p-4">
-        <b-dropdown split text="Record" variant="danger" class="mr-2">
-          <b-dropdown-item href="#">Play from beginning</b-dropdown-item>
-          <b-dropdown-item href="#">Play from selected</b-dropdown-item>
-        </b-dropdown>
         <b-dropdown split text="Play" variant="success" class="mr-2" @click="startPlayback">
           <b-dropdown-item href="#">Play from beginning</b-dropdown-item>
           <b-dropdown-item href="#">Play from selected</b-dropdown-item>
@@ -22,6 +18,7 @@
         <b-button @click="addWheel">Wheel</b-button>
         <b-button @click="addMove">Move</b-button>
         <b-button @click="addKey">Key</b-button>
+        <b-button @click="addWait">Wait</b-button>
         <small class="position-absolute text-muted bottom-left text-center mb-1 w-100">
           New Action
         </small>
@@ -38,6 +35,7 @@ import ActionClick from './actions/Click'
 import ActionWheel from './actions/Wheel'
 import ActionMove from './actions/Move'
 import ActionKey from './actions/Key'
+import ActionWait from './actions/Wait'
 
 const { ipcRenderer } = require('electron')
 
@@ -69,6 +67,11 @@ export default {
     addKey () {
       this.$store.dispatch('CREATE_ACTION', {
         action: ActionKey.methods.defaultAction()
+      })
+    },
+    addWait () {
+      this.$store.dispatch('CREATE_ACTION', {
+        action: ActionWait.methods.defaultAction()
       })
     },
     startPlayback () {

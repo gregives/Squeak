@@ -4,12 +4,12 @@
     <b-row>
       <b-col>
         <b-form-group label="X position">
-          <b-form-input v-model="editAction.firstPosition.x" type="number" :step="1" @change="updateAction"></b-form-input>
+          <b-form-input v-model="editAction.firstPosition.x" type="number" number :step="1" @change="updateAction"></b-form-input>
         </b-form-group>
       </b-col>
       <b-col>
         <b-form-group label="Y position">
-          <b-form-input v-model="editAction.firstPosition.y" type="number" :step="1" @change="updateAction"></b-form-input>
+          <b-form-input v-model="editAction.firstPosition.y" type="number" number :step="1" @change="updateAction"></b-form-input>
         </b-form-group>
       </b-col>
     </b-row>
@@ -19,17 +19,19 @@
     <b-row v-show="editAction.random">
       <b-col>
         <b-form-group label="X position">
-          <b-form-input v-model="editAction.secondPosition.x" type="number" :step="1" @change="updateAction"></b-form-input>
+          <b-form-input v-model="editAction.secondPosition.x" type="number" number :step="1" @change="updateAction"></b-form-input>
         </b-form-group>
       </b-col>
       <b-col>
         <b-form-group label="Y position">
-          <b-form-input v-model="editAction.secondPosition.y" type="number" :step="1" @change="updateAction"></b-form-input>
+          <b-form-input v-model="editAction.secondPosition.y" type="number" number :step="1" @change="updateAction"></b-form-input>
         </b-form-group>
       </b-col>
     </b-row>
-    <b-form-group label="Duration (ms)">
-      <b-form-input v-model="editAction.duration" type="number" :step="1" @change="updateAction"></b-form-input>
+    <b-form-group label="Duration">
+      <b-input-group append="ms">
+        <b-form-input v-model="editAction.duration" type="number" number @change="updateAction"></b-form-input>
+      </b-input-group>
     </b-form-group>
   </form>
 </template>

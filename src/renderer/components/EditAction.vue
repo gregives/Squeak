@@ -20,9 +20,8 @@
 
 <script>
 import ActionClick from './actions/Click'
-import ActionKey from './actions/Key'
 import ActionMove from './actions/Move'
-import ActionWheel from './actions/Wheel'
+import ActionPixel from './actions/Pixel'
 import ActionWait from './actions/Wait'
 
 export default {
@@ -53,9 +52,8 @@ export default {
   },
   components: {
     ActionClick,
-    ActionKey,
     ActionMove,
-    ActionWheel,
+    ActionPixel,
     ActionWait
   }
 }

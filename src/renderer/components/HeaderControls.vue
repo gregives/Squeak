@@ -3,24 +3,26 @@
     <b-col cols="auto">
       <div class="bg-white border-bottom border-right shadow-sm p-4">
         <b-dropdown split text="Play" variant="success" class="mr-2" @click="startPlayback">
-          <b-dropdown-item href="#">Play from beginning</b-dropdown-item>
-          <b-dropdown-item href="#">Play from selected</b-dropdown-item>
+          <b-dropdown-item @click="startPlaybackBeginning">Play from beginning</b-dropdown-item>
         </b-dropdown>
-        <b-dropdown split text="Stop" variant="info" @click="pausePlayback">
-          <b-dropdown-item href="#">Play from beginning</b-dropdown-item>
-          <b-dropdown-item href="#">Play from selected</b-dropdown-item>
-        </b-dropdown>
+        <b-button variant="info" @click="pausePlayback">Stop</b-button>
       </div>
     </b-col>
     <b-col cols="auto">
       <div class="bg-white border-bottom border-right shadow-sm p-4">
         <b-button @click="addClick">Click</b-button>
-        <b-button @click="addWheel">Wheel</b-button>
         <b-button @click="addMove">Move</b-button>
-        <b-button @click="addKey">Key</b-button>
-        <b-button @click="addWait">Wait</b-button>
         <small class="position-absolute text-muted bottom-left text-center mb-1 w-100">
-          New Action
+          Mouse
+        </small>
+      </div>
+    </b-col>
+    <b-col cols="auto">
+      <div class="bg-white border-bottom border-right shadow-sm p-4">
+        <b-button @click="addWait">Wait</b-button>
+        <b-button @click="addPixel">Pixel</b-button>
+        <small class="position-absolute text-muted bottom-left text-center mb-1 w-100">
+          Wait
         </small>
       </div>
     </b-col>
@@ -32,9 +34,8 @@
 
 <script>
 import ActionClick from './actions/Click'
-import ActionWheel from './actions/Wheel'
 import ActionMove from './actions/Move'
-import ActionKey from './actions/Key'
+import ActionPixel from './actions/Pixel'
 import ActionWait from './actions/Wait'
 
 const { ipcRenderer } = require('electron')
@@ -54,19 +55,14 @@ export default {
         action: ActionClick.methods.defaultAction()
       })
     },
-    addWheel () {
-      this.$store.dispatch('CREATE_ACTION', {
-        action: ActionWheel.methods.defaultAction()
-      })
-    },
     addMove () {
       this.$store.dispatch('CREATE_ACTION', {
         action: ActionMove.methods.defaultAction()
       })
     },
-    addKey () {
+    addPixel () {
       this.$store.dispatch('CREATE_ACTION', {
-        action: ActionKey.methods.defaultAction()
+        action: ActionPixel.methods.defaultAction()
       })
     },
     addWait () {
@@ -76,6 +72,9 @@ export default {
     },
     startPlayback () {
       ipcRenderer.send('START_PLAYBACK', this.actions, 0)
+    },
+    startPlaybackBeginning () {
+      ipcRenderer.send('START_PLAYBACK', this.actions, this.selected)
     },
     pausePlayback () {
       this.$store.dispatch('PAUSE_PLAYBACK')

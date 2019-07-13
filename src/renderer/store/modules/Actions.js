@@ -8,7 +8,7 @@ const mutations = {
     state.selected = index
   },
   CREATE_ACTION (state, { action }) {
-    state.actions.splice(state.selected + 1, 0, action)
+    state.actions.splice(state.selected + 1, 0, { ...action })
     state.selected += 1
   },
   DELETE_ACTION (state, { index }) {
@@ -16,7 +16,7 @@ const mutations = {
     state.selected = Math.min(state.selected, state.actions.length - 1)
   },
   UPDATE_ACTION (state, { index, action }) {
-    state.actions.splice(index, 1, action)
+    state.actions.splice(index, 1, { ...action })
   },
   MOVE_ACTION_UP (state, { index }) {
     if (index === 0) {

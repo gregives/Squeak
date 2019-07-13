@@ -14,7 +14,17 @@
       </b-col>
     </b-row>
     <b-form-group label="Color">
-      <b-form-input v-model="editAction.color" type="color" @change="updateAction"></b-form-input>
+      <b-form-input v-model="editAction.pixel.color" type="color" @change="updateAction"></b-form-input>
+    </b-form-group>
+    <b-form-group label="Poll every">
+      <b-input-group append="ms">
+        <b-form-input v-model="editAction.polling" type="number" number @change="updateAction"></b-form-input>
+      </b-input-group>
+    </b-form-group>
+    <b-form-group label="Timeout">
+      <b-input-group append="ms">
+        <b-form-input v-model="editAction.timeout" type="number" number @change="updateAction"></b-form-input>
+      </b-input-group>
     </b-form-group>
   </form>
 </template>
@@ -42,9 +52,10 @@ export default {
       this.$nextTick(() => {
         ioHook.on('mousedown', firstEvent => {
           ioHook.on('mouseup', secondEvent => {
+            const color = robot.getPixelColor(secondEvent.x, secondEvent.y)
             this.editAction.position.x = secondEvent.x
             this.editAction.position.y = secondEvent.y
-            this.editAction.color = '#' + robot.getPixelColor(secondEvent.x, secondEvent.y)
+            this.editAction.pixel.color = '#' + color
             ioHook._events = []
             ioHook._eventsCount = 0
             ioHook.enableClickPropagation()
@@ -59,7 +70,11 @@ export default {
           x: 0,
           y: 0
         },
-        color: '#000000'
+        pixel: {
+          color: '#000000'
+        },
+        polling: 100,
+        timeout: 10000
       }
     },
     updateAction () {

@@ -3,7 +3,7 @@
     <b-col cols="auto">
       <div class="bg-white border-bottom border-right shadow-sm p-4">
         <b-dropdown split text="Play" variant="success" class="mr-2" @click="startPlayback">
-          <b-dropdown-item @click="startPlaybackBeginning">Play from beginning</b-dropdown-item>
+          <b-dropdown-item @click="startPlaybackSelected">Play from selected</b-dropdown-item>
         </b-dropdown>
         <b-button variant="info" @click="pausePlayback">Stop</b-button>
       </div>
@@ -73,7 +73,7 @@ export default {
     startPlayback () {
       ipcRenderer.send('START_PLAYBACK', this.actions, 0)
     },
-    startPlaybackBeginning () {
+    startPlaybackSelected () {
       ipcRenderer.send('START_PLAYBACK', this.actions, this.selected)
     },
     pausePlayback () {

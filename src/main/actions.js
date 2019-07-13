@@ -44,12 +44,17 @@ function move (action, callback) {
 }
 
 function pixel (action, callback) {
-  let currentColor
-  do {
-    currentColor = '#' + robot.getPixelColor(action.position.x, action.position.y)
-  } while (currentColor !== action.color)
-  console.log('sgeesgsegseg')
-  callback()
+  let timeout = false
+  setTimeout(function () {
+    timeout = true
+  }, action.timeout)
+  const intervalID = setInterval(function () {
+    const currentColor = '#' + robot.getPixelColor(action.position.x, action.position.y)
+    if (currentColor === action.pixel.color || timeout) {
+      clearInterval(intervalID)
+      callback()
+    }
+  }, action.polling)
 }
 
 function wait (action, callback) {

@@ -1,5 +1,5 @@
 <template>
-  <b-card class="shadow">
+  <b-card class="shadow-sm">
     <h6 slot="header" class="mb-0">
       Edit Action
       <div class="float-right">

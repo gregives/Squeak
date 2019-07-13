@@ -1,33 +1,24 @@
 <template>
-  <b-row no-gutters>
-    <b-col cols="auto">
-      <div class="bg-white border-bottom border-right shadow-sm p-4">
-        <b-dropdown split text="Play" variant="success" class="mr-2" @click="startPlayback">
-          <b-dropdown-item @click="startPlaybackSelected">Play from selected</b-dropdown-item>
-        </b-dropdown>
-        <b-button variant="info" @click="pausePlayback">Stop</b-button>
-      </div>
+  <b-row no-gutters class="bg-white border-bottom">
+    <b-col cols="auto" class="border-right p-4">
+      <b-dropdown split text="Play" variant="success" class="mr-2" @click="startPlayback">
+        <b-dropdown-item @click="startPlaybackSelected">Play from selected</b-dropdown-item>
+      </b-dropdown>
+      <b-button variant="info" @click="pausePlayback">Stop</b-button>
     </b-col>
-    <b-col cols="auto">
-      <div class="bg-white border-bottom border-right shadow-sm p-4">
-        <b-button @click="addClick">Click</b-button>
-        <b-button @click="addMove">Move</b-button>
-        <small class="position-absolute text-muted bottom-left text-center mb-1 w-100">
-          Mouse
-        </small>
-      </div>
+    <b-col cols="auto" class="border-right p-4">
+      <b-button @click="addClick">Click</b-button>
+      <b-button @click="addMove">Move</b-button>
+      <small class="position-absolute text-muted bottom-left text-center mb-1 w-100">
+        Mouse
+      </small>
     </b-col>
-    <b-col cols="auto">
-      <div class="bg-white border-bottom border-right shadow-sm p-4">
-        <b-button @click="addWait">Wait</b-button>
-        <b-button @click="addPixel">Pixel</b-button>
-        <small class="position-absolute text-muted bottom-left text-center mb-1 w-100">
-          Wait
-        </small>
-      </div>
-    </b-col>
-    <b-col>
-      <div class="bg-white border-bottom shadow-sm p-4"></div>
+    <b-col cols="auto" class="border-right p-4">
+      <b-button @click="addWait">Wait</b-button>
+      <b-button @click="addPixel">Pixel</b-button>
+      <small class="position-absolute text-muted bottom-left text-center mb-1 w-100">
+        Wait
+      </small>
     </b-col>
   </b-row>
 </template>

@@ -26,6 +26,11 @@
         <b-form-input v-model="editAction.timeout" type="number" number @change="updateAction"></b-form-input>
       </b-input-group>
     </b-form-group>
+    <b-form-group label="After timeout">
+      <b-input-group prepend="#">
+        <b-form-input v-model="editAction.goTo" type="number" number @change="updateAction"></b-form-input>
+      </b-input-group>
+    </b-form-group>
   </form>
 </template>
 
@@ -74,7 +79,8 @@ export default {
           color: '#000000'
         },
         polling: 100,
-        timeout: 10000
+        timeout: 10000,
+        goTo: this.selected + 1
       }
     },
     updateAction () {

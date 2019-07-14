@@ -16,6 +16,7 @@ import actionFunctions from './actions.js'
     // Set playing to true
     playing = true
 
+    let index = index
     let nextAction = actions[index]
     let actionFunction = actionFunctions[nextAction.action]
 

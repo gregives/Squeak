@@ -52,7 +52,11 @@ function pixel (action, callback) {
     const currentColor = '#' + robot.getPixelColor(action.position.x, action.position.y)
     if (currentColor === action.pixel.color || timeout) {
       clearInterval(intervalID)
-      callback()
+      if (timeout) {
+        callback(action.goTo)
+      } else {
+        callback()
+      }
     }
   }, action.polling)
 }

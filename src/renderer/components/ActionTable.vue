@@ -1,5 +1,8 @@
 <template>
-  <b-card no-body class="shadow-sm">
+  <b-card no-body class="shadow-sm"
+    :footer="`${actions.length} actions, ${selected.length} selected`"
+    footer-class="text-muted"
+  >
     <b-table
       hover
       bordered
@@ -26,16 +29,43 @@ export default {
         return {
           ...action,
           index,
-          _rowVariant: index === this.selected ? 'primary' : null
+          _rowVariant: this.selected.includes(index) ? 'primary' : null
         }
       })
     }
   },
   methods: {
-    rowClicked (action) {
-      this.$store.dispatch('SELECT_ACTION', {
-        index: action.index
-      })
+    rowClicked (action, clicked, event) {
+      if (event.shiftKey) {
+        const selected = this.selected[this.selected.length - 1]
+        if (clicked > selected) {
+          this.$store.dispatch('SELECT_ACTION', {
+            indices: Array.from({
+              length: clicked - selected + 1
+            }, (value, index) => selected + index)
+          })
+        } else {
+          this.$store.dispatch('SELECT_ACTION', {
+            indices: Array.from({
+              length: selected - clicked + 1
+            }, (value, index) => selected - index)
+          })
+        }
+      } else if (event.ctrlKey) {
+        const selected = this.selected
+        if (selected.includes(clicked)) {
+          selected.splice(selected.indexOf(clicked), 1)
+        } else {
+          selected.push(clicked)
+        }
+        this.$store.dispatch('SELECT_ACTION', {
+          indices: selected
+        })
+      } else {
+        this.$store.dispatch('SELECT_ACTION', {
+          indices: [clicked]
+        })
+      }
     }
   }
 }
@@ -44,6 +74,7 @@ export default {
 <style lang="sass">
 table
   border: 0 !important
+  user-select: none
 
   td
     cursor: pointer
@@ -53,9 +84,8 @@ table
     border-top: 0 !important
 
   tr:focus
-    color: #212529
-    background-color: rgba(0, 0, 0, 0.05)
-    outline: none
+    outline: 2px solid #007bff
+    outline-offset: -1px
 
   td
     padding: 0.5rem 0.75rem !important

@@ -1,38 +1,59 @@
 const state = {
   actions: [],
-  selected: null
+  selected: []
 }
 
 const mutations = {
-  SELECT_ACTION (state, { index }) {
-    state.selected = index
+  SELECT_ACTION (state, { indices }) {
+    state.selected = indices
   },
   CREATE_ACTION (state, { action }) {
-    state.actions.splice(state.selected + 1, 0, { ...action })
-    state.selected += 1
+    let selected
+    if (state.selected.length > 0) {
+      selected = state.selected[state.selected.length - 1]
+    } else {
+      selected = -1
+    }
+    state.actions.splice(selected + 1, 0, { ...action })
+    state.selected = [selected + 1]
   },
-  DELETE_ACTION (state, { index }) {
-    state.actions.splice(index, 1)
-    state.selected = Math.min(state.selected, state.actions.length - 1)
+  UPDATE_ACTION (state, { action }) {
+    const selected = state.selected[state.selected.length - 1]
+    state.actions.splice(selected, 1, { ...action })
   },
-  UPDATE_ACTION (state, { index, action }) {
-    state.actions.splice(index, 1, { ...action })
+  DELETE_ACTION (state) {
+    const selected = state.selected
+    selected.sort()
+    selected.reverse()
+    for (let index of selected) {
+      state.actions.splice(index, 1)
+    }
+    state.selected = [Math.min(Math.min(...state.selected), state.actions.length - 1)]
   },
-  MOVE_ACTION_UP (state, { index }) {
-    if (index === 0) {
+  MOVE_ACTION_UP (state) {
+    const selected = state.selected
+    selected.sort()
+    if (selected[0] === 0) {
       return
     }
-    const action = state.actions.splice(index, 1)[0]
-    state.actions.splice(index - 1, 0, action)
-    state.selected -= 1
+    for (let index of selected) {
+      const action = state.actions.splice(index, 1)[0]
+      state.actions.splice(index - 1, 0, action)
+    }
+    state.selected = state.selected.map(index => index - 1)
   },
-  MOVE_ACTION_DN (state, { index }) {
-    if (index === state.actions.length - 1) {
+  MOVE_ACTION_DN (state) {
+    const selected = state.selected
+    selected.sort()
+    selected.reverse()
+    if (selected[0] === state.actions.length - 1) {
       return
     }
-    const action = state.actions.splice(index, 1)[0]
-    state.actions.splice(index + 1, 0, action)
-    state.selected += 1
+    for (let index of selected) {
+      const action = state.actions.splice(index, 1)[0]
+      state.actions.splice(index + 1, 0, action)
+    }
+    state.selected = state.selected.map(index => index + 1)
   }
 }
 

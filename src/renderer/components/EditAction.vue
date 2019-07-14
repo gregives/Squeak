@@ -27,7 +27,8 @@ import ActionWait from './actions/Wait'
 export default {
   computed: {
     selected () {
-      return this.$store.state.Actions.selected
+      const selected = this.$store.state.Actions.selected
+      return selected[selected.length - 1]
     },
     action () {
       return this.$store.state.Actions.actions[this.selected]
@@ -35,19 +36,13 @@ export default {
   },
   methods: {
     deleteAction () {
-      return this.$store.dispatch('DELETE_ACTION', {
-        index: this.selected
-      })
+      return this.$store.dispatch('DELETE_ACTION')
     },
     moveActionUp () {
-      return this.$store.dispatch('MOVE_ACTION_UP', {
-        index: this.selected
-      })
+      return this.$store.dispatch('MOVE_ACTION_UP')
     },
     moveActionDown () {
-      return this.$store.dispatch('MOVE_ACTION_DN', {
-        index: this.selected
-      })
+      return this.$store.dispatch('MOVE_ACTION_DN')
     }
   },
   components: {

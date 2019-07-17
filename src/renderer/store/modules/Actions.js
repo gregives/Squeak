@@ -1,5 +1,6 @@
 const state = {
   actions: [],
+  repeat: 1,
   selected: []
 }
 
@@ -20,6 +21,9 @@ const mutations = {
   UPDATE_ACTION (state, { action }) {
     const selected = state.selected[state.selected.length - 1]
     state.actions.splice(selected, 1, { ...action })
+  },
+  UPDATE_REPEAT (state, { repeat }) {
+    state.repeat = repeat
   },
   DELETE_ACTION (state) {
     const selected = state.selected

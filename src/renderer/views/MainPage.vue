@@ -4,6 +4,7 @@
     <b-container fluid class="p-4">
       <b-row>
         <b-col cols="8" class="pr-2">
+          <selected-controls class="mb-3"></selected-controls>
           <action-table></action-table>
         </b-col>
         <b-col cols="4" class="position-fixed top-right mt-4 pr-4">
@@ -18,12 +19,14 @@
 import HeaderControls from '@/components/HeaderControls'
 import ActionTable from '@/components/ActionTable'
 import EditAction from '@/components/EditAction'
+import SelectedControls from '@/components/SelectedControls'
 
 export default {
   components: {
     HeaderControls,
     ActionTable,
-    EditAction
+    EditAction,
+    SelectedControls
   }
 }
 </script>

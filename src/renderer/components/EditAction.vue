@@ -1,19 +1,6 @@
 <template>
   <b-card class="shadow-sm">
-    <h6 slot="header" class="mb-0">
-      Edit Action
-      <div class="float-right">
-        <b-button size="sm" @click="moveActionUp">
-          <font-awesome-icon icon="caret-up"/>
-        </b-button>
-        <b-button size="sm" @click="moveActionDown">
-          <font-awesome-icon icon="caret-down"/>
-        </b-button>
-        <b-button variant="danger" size="sm" @click="deleteAction">
-          <font-awesome-icon icon="trash"/>
-        </b-button>
-      </div>
-    </h6>
+    <div slot="header">Edit Action <strong>#{{ selected + 1 }}</strong></div>
     <component :is="action ? `action-${action.action}` : null" :action="action"></component>
   </b-card>
 </template>
@@ -32,17 +19,6 @@ export default {
     },
     action () {
       return this.$store.state.Actions.actions[this.selected]
-    }
-  },
-  methods: {
-    deleteAction () {
-      return this.$store.dispatch('DELETE_ACTION')
-    },
-    moveActionUp () {
-      return this.$store.dispatch('MOVE_ACTION_UP')
-    },
-    moveActionDown () {
-      return this.$store.dispatch('MOVE_ACTION_DN')
     }
   },
   components: {

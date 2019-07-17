@@ -33,6 +33,9 @@ const { ipcRenderer } = require('electron')
 
 export default {
   computed: {
+    repeat () {
+      return this.$store.state.Actions.repeat
+    },
     selected () {
       return this.$store.state.Actions.selected
     },
@@ -62,10 +65,10 @@ export default {
       })
     },
     startPlayback () {
-      ipcRenderer.send('START_PLAYBACK', this.actions, 0)
+      ipcRenderer.send('START_PLAYBACK', this.actions, 0, this.repeat)
     },
     startPlaybackSelected () {
-      ipcRenderer.send('START_PLAYBACK', this.actions, this.selected)
+      ipcRenderer.send('START_PLAYBACK', this.actions, this.selected, this.repeat)
     },
     pausePlayback () {
       this.$store.dispatch('PAUSE_PLAYBACK')

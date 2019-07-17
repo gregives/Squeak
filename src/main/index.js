@@ -10,19 +10,23 @@ import actionFunctions from './actions.js'
   let playing = false
 
   // Start playback from Vue
-  ipcMain.on('START_PLAYBACK', (event, actions, index) => {
+  ipcMain.on('START_PLAYBACK', (event, actions, index, repeat) => {
     // Minimize window
     BrowserWindow.getFocusedWindow().minimize()
+
     // Set playing to true
     playing = true
 
-    let index = index
     let nextAction = actions[index]
     let actionFunction = actionFunctions[nextAction.action]
 
     actionFunction(nextAction, function finishedPlay (goTo) {
       // Get next action index
       index = goTo || index + 1
+      if (repeat > 1 && index === actions.length) {
+        repeat -= 1
+        index = 0
+      }
       playing = playing && index < actions.length
 
       if (playing) {

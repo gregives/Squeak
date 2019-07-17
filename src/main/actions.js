@@ -24,6 +24,7 @@ function move (action, callback) {
 
   if (action.duration === 0) {
     robot.moveMouse(endPosition.x, endPosition.y)
+    callback()
   } else {
     const startPosition = robot.getMousePos()
     let startTimestamp

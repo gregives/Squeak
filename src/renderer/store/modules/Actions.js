@@ -1,6 +1,6 @@
 const state = {
   actions: [],
-  repeat: 1,
+  repeat: 0,
   selected: []
 }
 
@@ -32,7 +32,11 @@ const mutations = {
     for (let index of selected) {
       state.actions.splice(index, 1)
     }
-    state.selected = [Math.min(Math.min(...state.selected), state.actions.length - 1)]
+    if (state.actions.length === 0) {
+      state.selected = []
+    } else {
+      state.selected = [Math.min(Math.min(...state.selected), state.actions.length - 1)]
+    }
   },
   MOVE_ACTION_UP (state) {
     const selected = state.selected

@@ -1,14 +1,14 @@
 <template>
   <form>
     <b-form-group label="Button">
-      <b-form-select v-model="editAction.button" @change="updateAction">
+      <b-form-select v-model="editAction.button" @input="updateAction">
         <option value="left">Left</option>
         <option value="right">Right</option>
         <option value="middle">Middle</option>
       </b-form-select>
     </b-form-group>
     <b-form-group label="Click type">
-      <b-form-select v-model="editAction.type" @change="updateAction">
+      <b-form-select v-model="editAction.type" @input="updateAction">
         <option value="click">Single click</option>
         <option value="double">Double click</option>
         <option value="down">Button down</option>
@@ -26,9 +26,6 @@ export default {
   computed: {
     editAction () {
       return { ...this.action }
-    },
-    selected () {
-      return this.$store.state.Actions.selected
     }
   },
   methods: {
@@ -41,7 +38,6 @@ export default {
     },
     updateAction () {
       this.$store.dispatch('UPDATE_ACTION', {
-        index: this.selected,
         action: this.editAction
       })
     }

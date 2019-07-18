@@ -4,31 +4,31 @@
     <b-row>
       <b-col>
         <b-form-group label="X position">
-          <b-form-input v-model="editAction.position.x" type="number" number :step="1" @change="updateAction"></b-form-input>
+          <b-form-input v-model="editAction.position.x" type="number" number :step="1" @input="updateAction"></b-form-input>
         </b-form-group>
       </b-col>
       <b-col>
         <b-form-group label="Y position">
-          <b-form-input v-model="editAction.position.y" type="number" number :step="1" @change="updateAction"></b-form-input>
+          <b-form-input v-model="editAction.position.y" type="number" number :step="1" @input="updateAction"></b-form-input>
         </b-form-group>
       </b-col>
     </b-row>
     <b-form-group label="Color">
-      <b-form-input v-model="editAction.pixel.color" type="color" @change="updateAction"></b-form-input>
+      <b-form-input v-model="editAction.pixel.color" type="color" @input="updateAction"></b-form-input>
     </b-form-group>
     <b-form-group label="Poll every">
       <b-input-group append="ms">
-        <b-form-input v-model="editAction.polling" type="number" number @change="updateAction"></b-form-input>
+        <b-form-input v-model="editAction.polling" type="number" number @input="updateAction"></b-form-input>
       </b-input-group>
     </b-form-group>
     <b-form-group label="Timeout">
       <b-input-group append="ms">
-        <b-form-input v-model="editAction.timeout" type="number" number @change="updateAction"></b-form-input>
+        <b-form-input v-model="editAction.timeout" type="number" number @input="updateAction"></b-form-input>
       </b-input-group>
     </b-form-group>
     <b-form-group label="After timeout">
       <b-input-group prepend="#">
-        <b-form-input v-model="editAction.goTo" type="number" number @change="updateAction"></b-form-input>
+        <b-form-input v-model="editAction.afterTimeout" type="number" number @input="updateAction"></b-form-input>
       </b-input-group>
     </b-form-group>
   </form>
@@ -47,7 +47,7 @@ export default {
       return { ...this.action }
     },
     selected () {
-      return this.$store.state.Actions.selected
+      return this.$store.state.Actions.selected[0]
     }
   },
   methods: {
@@ -80,12 +80,11 @@ export default {
         },
         polling: 100,
         timeout: 10000,
-        goTo: this.selected + 1
+        afterTimeout: 0
       }
     },
     updateAction () {
       this.$store.dispatch('UPDATE_ACTION', {
-        index: this.selected,
         action: this.editAction
       })
     }

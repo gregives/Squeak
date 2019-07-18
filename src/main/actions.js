@@ -54,7 +54,7 @@ function pixel (action, callback) {
     if (currentColor === action.pixel.color || timeout) {
       clearInterval(intervalID)
       if (timeout) {
-        callback(action.goTo)
+        callback(action.afterTimeout)
       } else {
         callback()
       }

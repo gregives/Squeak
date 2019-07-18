@@ -2,7 +2,7 @@
   <div class="clearfix">
     <div class="float-left">
       <b-input-group prepend="Repeat" append="times">
-        <b-form-input type="number" number :step="1" :value="repeat" @change="updateRepeat"></b-form-input>
+        <b-form-input type="number" number :step="1" class="repeat-input" :value="repeat" @input="updateRepeat"></b-form-input>
       </b-input-group>
     </div>
     <div class="float-right">
@@ -57,3 +57,8 @@ export default {
   }
 }
 </script>
+
+<style lang="sass">
+.repeat-input
+  width: 100px !important
+</style>

@@ -20,6 +20,9 @@
         Wait
       </small>
     </b-col>
+    <b-col cols="auto" class="border-right p-4">
+      <b-button @click="addGoTo">Go to</b-button>
+    </b-col>
   </b-row>
 </template>
 
@@ -28,6 +31,7 @@ import ActionClick from './actions/Click'
 import ActionMove from './actions/Move'
 import ActionPixel from './actions/Pixel'
 import ActionWait from './actions/Wait'
+import ActionGoTo from './actions/GoTo'
 
 const { ipcRenderer } = require('electron')
 
@@ -37,7 +41,8 @@ export default {
       return this.$store.state.Actions.repeat
     },
     selected () {
-      return this.$store.state.Actions.selected
+      const selected = this.$store.state.Actions.selected
+      return selected[selected.length - 1]
     },
     actions () {
       return this.$store.state.Actions.actions
@@ -62,6 +67,11 @@ export default {
     addWait () {
       this.$store.dispatch('CREATE_ACTION', {
         action: ActionWait.methods.defaultAction()
+      })
+    },
+    addGoTo () {
+      this.$store.dispatch('CREATE_ACTION', {
+        action: ActionGoTo.methods.defaultAction()
       })
     },
     startPlayback () {

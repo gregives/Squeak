@@ -1,6 +1,9 @@
 <template>
   <b-card class="shadow-sm">
-    <div slot="header">Edit Action <strong>#{{ selected + 1 }}</strong></div>
+    <div slot="header">
+      Edit Action
+      <strong v-if="selected !== undefined">#{{ selected + 1 }}</strong>
+    </div>
     <component :is="action ? `action-${action.action}` : null" :action="action"></component>
   </b-card>
 </template>
@@ -10,6 +13,7 @@ import ActionClick from './actions/Click'
 import ActionMove from './actions/Move'
 import ActionPixel from './actions/Pixel'
 import ActionWait from './actions/Wait'
+import ActionGoTo from './actions/GoTo'
 
 export default {
   computed: {
@@ -25,7 +29,8 @@ export default {
     ActionClick,
     ActionMove,
     ActionPixel,
-    ActionWait
+    ActionWait,
+    ActionGoTo
   }
 }
 </script>

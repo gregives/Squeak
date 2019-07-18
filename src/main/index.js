@@ -16,13 +16,14 @@ import actionFunctions from './actions.js'
 
     // Set playing to true
     playing = true
+    repeat += 1
 
     let nextAction = actions[index]
     let actionFunction = actionFunctions[nextAction.action]
 
     actionFunction(nextAction, function finishedPlay (goTo) {
       // Get next action index
-      index = goTo || index + 1
+      index = goTo !== undefined ? goTo - 1 : index + 1
       if (repeat > 1 && index === actions.length) {
         repeat -= 1
         index = 0

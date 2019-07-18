@@ -67,9 +67,14 @@ function wait (action, callback) {
   setTimeout(callback, waitFor)
 }
 
+function goTo (action, callback) {
+  callback(action.goTo)
+}
+
 export default {
   click,
   move,
   pixel,
-  wait
+  wait,
+  goTo
 }

@@ -2,7 +2,7 @@
   <b-container class="d-flex flex-column vh-100" fluid>
     <header-controls class="flex-shrink-0"></header-controls>
     <b-row class="flex-grow-1">
-      <b-col class="d-flex flex-column" cols="8">
+      <b-col class="d-flex flex-column pr-0" cols="8">
         <selected-controls class="my-3"></selected-controls>
         <action-table class="flex-grow-1"></action-table>
       </b-col>
@@ -28,8 +28,3 @@ export default {
   }
 }
 </script>
-
-<style lang="sass">
-body
-  background-color: #FBFBFB
-</style>

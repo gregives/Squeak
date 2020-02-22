@@ -11,18 +11,18 @@
       :fields="fields"
       :items="actions"
       sticky-header="100%"
-      class="flex-grow-1 flex-shrink-1 mb-0"
+      class="mb-0"
       @row-clicked="rowClicked"
     ></b-table>
   </b-card>
 </template>
 
 <script>
-import ActionClick from './actions/Click'
-import ActionGoTo from './actions/GoTo'
-import ActionMove from './actions/Move'
-import ActionPixel from './actions/Pixel'
-import ActionWait from './actions/Wait'
+import ActionClick from '@/components/actions/Click'
+import ActionGoTo from '@/components/actions/GoTo'
+import ActionMove from '@/components/actions/Move'
+import ActionPixel from '@/components/actions/Pixel'
+import ActionWait from '@/components/actions/Wait'
 
 const actions = {
   click: ActionClick,
@@ -101,7 +101,14 @@ export default {
 </script>
 
 <style lang="sass">
-table
+.b-table-sticky-header
+  flex: 1 1 0
+  overflow-y: scroll
+
+  ~ .card-footer
+    padding: 0.75rem
+
+.b-table
   border: 0 !important
   user-select: none
 

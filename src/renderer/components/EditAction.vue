@@ -10,11 +10,11 @@
 </template>
 
 <script>
-import ActionClick from './actions/Click'
-import ActionMove from './actions/Move'
-import ActionPixel from './actions/Pixel'
-import ActionWait from './actions/Wait'
-import ActionGoTo from './actions/GoTo'
+import ActionClick from '@/components/actions/Click'
+import ActionMove from '@/components/actions/Move'
+import ActionPixel from '@/components/actions/Pixel'
+import ActionWait from '@/components/actions/Wait'
+import ActionGoTo from '@/components/actions/GoTo'
 
 export default {
   computed: {

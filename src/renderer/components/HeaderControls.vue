@@ -1,6 +1,6 @@
 <template>
   <b-row no-gutters class="header-controls bg-white border-bottom">
-    <b-col cols="8">
+    <b-col class="overflow-auto text-nowrap" cols="8">
       <div class="d-inline-block border-right position-relative p-3 pb-4">
         <b-dropdown split text="Play" variant="success" class="mr-2" @click="startPlayback">
           <b-dropdown-item @click="startPlaybackSelected">Play from selected</b-dropdown-item>
@@ -29,11 +29,11 @@
 </template>
 
 <script>
-import ActionClick from './actions/Click'
-import ActionMove from './actions/Move'
-import ActionPixel from './actions/Pixel'
-import ActionWait from './actions/Wait'
-import ActionGoTo from './actions/GoTo'
+import ActionClick from '@/components/actions/Click'
+import ActionMove from '@/components/actions/Move'
+import ActionPixel from '@/components/actions/Pixel'
+import ActionWait from '@/components/actions/Wait'
+import ActionGoTo from '@/components/actions/GoTo'
 
 const { ipcRenderer } = require('electron')
 
@@ -94,8 +94,4 @@ export default {
   margin-left: 50%
   transform: translateX(-50%)
   width: 100vw
-
-  > div
-    overflow-x: auto
-    white-space: nowrap
 </style>

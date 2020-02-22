@@ -69,6 +69,7 @@ function createWindow () {
     useContentSize: true,
     width: 1000,
     webPreferences: {
+      nodeIntegration: true,
       zoomFactor: 0.8
     }
   })

@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "author": "Greg Ives <gregives774@gmail.com>",
   "description": "An open-source auto clicker.",
-  "license": null,
   "main": "./dist/electron/main.js",
   "scripts": {
     "build": "node .electron-vue/build.js && electron-builder",

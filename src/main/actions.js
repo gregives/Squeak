@@ -6,7 +6,7 @@ function animationFrame (fun) {
 }
 
 function click (action, callback) {
-  if (action.type === 'click' || action.type === 'double') {
+  if (action.type === 'single' || action.type === 'double') {
     robot.mouseClick(action.button, action.type === 'double')
   } else {
     robot.mouseToggle(action.type, action.button)
@@ -51,7 +51,7 @@ function pixel (action, callback) {
   }, action.timeout)
   const intervalID = setInterval(function () {
     const currentColor = '#' + robot.getPixelColor(action.position.x, action.position.y)
-    if (currentColor === action.pixel.color || timeout) {
+    if (currentColor === action.color || timeout) {
       clearInterval(intervalID)
       if (timeout) {
         callback(action.afterTimeout)

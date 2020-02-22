@@ -31,6 +31,12 @@ export default {
         random: 1000
       }
     },
+    getTableValues (action) {
+      return {
+        action: 'Wait',
+        value: `Wait ${action.wait}ms${action.random ? ` to ${(action.wait + action.random)}ms` : ''}`
+      }
+    },
     updateAction () {
       this.$store.dispatch('UPDATE_ACTION', {
         action: this.editAction

@@ -1,6 +1,9 @@
 <template>
   <form>
     <b-button @click="getPosition" block variant="primary" class="mb-3">Click position</b-button>
+    <b-form-group label="Color">
+      <b-form-input v-model="editAction.color" type="color" @input="updateAction"></b-form-input>
+    </b-form-group>
     <b-row>
       <b-col>
         <b-form-group label="X position">
@@ -13,9 +16,6 @@
         </b-form-group>
       </b-col>
     </b-row>
-    <b-form-group label="Color">
-      <b-form-input v-model="editAction.pixel.color" type="color" @input="updateAction"></b-form-input>
-    </b-form-group>
     <b-form-group label="Poll every">
       <b-input-group append="ms">
         <b-form-input v-model="editAction.polling" type="number" number @input="updateAction"></b-form-input>
@@ -60,7 +60,7 @@ export default {
             const color = robot.getPixelColor(secondEvent.x, secondEvent.y)
             this.editAction.position.x = secondEvent.x
             this.editAction.position.y = secondEvent.y
-            this.editAction.pixel.color = '#' + color
+            this.editAction.color = '#' + color
             ioHook._events = []
             ioHook._eventsCount = 0
             ioHook.enableClickPropagation()
@@ -75,12 +75,18 @@ export default {
           x: 0,
           y: 0
         },
-        pixel: {
-          color: '#000000'
-        },
+        color: '#000000',
         polling: 100,
         timeout: 10000,
         afterTimeout: 0
+      }
+    },
+    getTableValues (action) {
+      const position = `[${action.position.x}, ${action.position.y}]`
+
+      return {
+        action: 'Pixel',
+        value: `Color ${action.color}, ${position}, poll ${action.polling}ms, timeout ${action.timeout}ms, #${action.afterTimeout}`
       }
     },
     updateAction () {

@@ -18,7 +18,37 @@
 </template>
 
 <script>
+import ActionClick from './actions/Click'
+import ActionGoTo from './actions/GoTo'
+import ActionMove from './actions/Move'
+import ActionPixel from './actions/Pixel'
+import ActionWait from './actions/Wait'
+
+const actions = {
+  click: ActionClick,
+  goTo: ActionGoTo,
+  move: ActionMove,
+  pixel: ActionPixel,
+  wait: ActionWait
+}
+
 export default {
+  data () {
+    return {
+      fields: [
+        {
+          key: 'index',
+          label: '#'
+        },
+        {
+          key: 'action'
+        },
+        {
+          key: 'value'
+        }
+      ]
+    }
+  },
   computed: {
     selected () {
       return this.$store.state.Actions.selected
@@ -26,7 +56,7 @@ export default {
     actions () {
       return this.$store.state.Actions.actions.map((action, index) => {
         return {
-          ...action,
+          ...actions[action.action].methods.getTableValues(action),
           index,
           _rowVariant: this.selected.includes(index) ? 'primary' : null
         }

@@ -28,6 +28,12 @@ export default {
         goTo: 0
       }
     },
+    getTableValues (action) {
+      return {
+        action: 'Go to',
+        value: `Action #${action.goTo}`
+      }
+    },
     updateAction () {
       this.$store.dispatch('UPDATE_ACTION', {
         action: this.editAction

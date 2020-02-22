@@ -9,7 +9,7 @@
     </b-form-group>
     <b-form-group label="Click type">
       <b-form-select v-model="editAction.type" @input="updateAction">
-        <option value="click">Single click</option>
+        <option value="single">Single click</option>
         <option value="double">Double click</option>
         <option value="down">Button down</option>
         <option value="up">Button up</option>
@@ -33,7 +33,14 @@ export default {
       return {
         action: 'click',
         button: 'left',
-        type: 'click'
+        type: 'single'
+      }
+    },
+    getTableValues (action) {
+      const toTitleCase = (string) => string.charAt(0).toUpperCase() + string.substr(1)
+      return {
+        action: 'Click',
+        value: `${toTitleCase(action.type)} ${action.button} click`
       }
     },
     updateAction () {

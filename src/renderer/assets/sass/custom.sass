@@ -8,6 +8,23 @@ body
 #app
   min-height: 100vh
 
+::-webkit-scrollbar
+  height: 0.5rem
+  width: 0.5rem
+
+::-webkit-scrollbar-track
+  background-color: rgba(0, 0, 0, 0.1)
+
+::-webkit-scrollbar-thumb
+  border-radius: 0.25rem
+  background-color: rgba(0, 0, 0, 0.2)
+
+  &:hover
+    background-color: rgba(0, 0, 0, 0.3)
+
+  &:active
+    background-color: rgba(0, 0, 0, 0.4)
+
 .bottom-left
   bottom: 0
   left: 0

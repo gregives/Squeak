@@ -1,18 +1,16 @@
 <template>
-  <div id="wrapper">
-    <header-controls></header-controls>
-    <b-container fluid class="p-4">
-      <b-row>
-        <b-col cols="8" class="pr-2">
-          <selected-controls class="mb-3"></selected-controls>
-          <action-table></action-table>
-        </b-col>
-        <b-col cols="4" class="position-fixed top-right mt-4 pr-4">
-          <edit-action></edit-action>
-        </b-col>
-      </b-row>
-    </b-container>
-  </div>
+  <b-container class="d-flex flex-column vh-100" fluid>
+    <header-controls class="flex-shrink-0"></header-controls>
+    <b-row class="flex-grow-1">
+      <b-col class="d-flex flex-column" cols="8">
+        <selected-controls class="my-3"></selected-controls>
+        <action-table class="flex-grow-1"></action-table>
+      </b-col>
+      <b-col cols="4">
+        <edit-action></edit-action>
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 
 <script>

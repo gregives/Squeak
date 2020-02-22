@@ -1,20 +1,19 @@
 <template>
-  <b-card no-body class="shadow-sm"
+  <b-card
+    no-body
+    class="d-flex flex-column shadow-sm mb-4"
     :footer="`${actions.length} actions, ${selected.length} selected`"
     footer-class="text-muted"
   >
     <b-table
       hover
       bordered
+      :fields="fields"
       :items="actions"
-      class="mb-0"
+      sticky-header="100%"
+      class="flex-grow-1 flex-shrink-1 mb-0"
       @row-clicked="rowClicked"
-      show-empty
-    >
-      <template slot="empty">
-        <h4>Click to add an action</h4>
-      </template>
-    </b-table>
+    ></b-table>
   </b-card>
 </template>
 
@@ -97,7 +96,4 @@ table
   td:last-child,
   th:last-child
     border-right: 0 !important
-
-  tr:last-child td
-    border-bottom: 0 !important
 </style>

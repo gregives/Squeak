@@ -36,10 +36,9 @@ export default {
 </script>
 
 <style lang="sass">
-.card-header .float-right
-  margin-top: -6.5px
-  margin-bottom: -6.5px
+.edit-action
+  margin-top: -4rem
 
-form > .form-group:last-of-type
-  margin-bottom: 0
+  form > .form-group:last-of-type
+    margin-bottom: 0
 </style>

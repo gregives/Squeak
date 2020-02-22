@@ -1,7 +1,9 @@
 'use strict'
 
-import { app, BrowserWindow, ipcMain } from 'electron'
-import actionFunctions from './actions.js'
+import { app, BrowserWindow, ipcMain, Menu } from 'electron'
+
+import actionFunctions from './actions'
+import createMenu from './menu'
 
 /**
 * Control playing of actions, from server-side Node.js
@@ -74,6 +76,7 @@ function createWindow () {
     }
   })
 
+  Menu.setApplicationMenu(Menu.buildFromTemplate(createMenu(mainWindow)))
   mainWindow.loadURL(winURL)
 
   mainWindow.on('closed', () => {

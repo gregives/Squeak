@@ -19,8 +19,7 @@ import ActionTable from '@/components/ActionTable'
 import EditAction from '@/components/EditAction'
 import SelectedControls from '@/components/SelectedControls'
 
-const { ipcRenderer } = require('electron')
-const { writeFile } = require('fs')
+const { ipcRenderer, remote } = require('electron')
 
 export default {
   components: {
@@ -30,12 +29,33 @@ export default {
     SelectedControls
   },
   created () {
-    ipcRenderer.on('SAVE_FILE_AS', (event, { filePath }) => {
-      const contents = JSON.stringify(this.$store.state.actions, null, 2)
-      writeFile(filePath, contents, (error) => {
-        console.log(error ? 'Failed to save' : 'Saved successfully')
-      })
+    ipcRenderer.on('SAVE_FILE', (event) => {
+      if (this.$store.state.actions.filePath !== null) {
+        this.$store.dispatch('SAVE_FILE')
+      } else {
+        this.SAVE_FILE_AS()
+      }
     })
+    ipcRenderer.on('SAVE_FILE_AS', (event) => {
+      this.SAVE_FILE_AS()
+    })
+    ipcRenderer.on('UNDO_HISTORY', (event) => {
+      this.$store.dispatch('UNDO_HISTORY')
+    })
+    ipcRenderer.on('REDO_HISTORY', (event) => {
+      this.$store.dispatch('REDO_HISTORY')
+    })
+  },
+  methods: {
+    SAVE_FILE_AS () {
+      remote.dialog.showSaveDialog(remote.getCurrentWindow(), {
+        filters: [
+          { name: 'Custom File Type', extensions: ['json'] }
+        ]
+      }).then(({ filePath }) => {
+        this.$store.dispatch('SAVE_FILE_AS', { filePath })
+      })
+    }
   }
 }
 </script>

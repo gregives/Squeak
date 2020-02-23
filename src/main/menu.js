@@ -1,4 +1,4 @@
-const { dialog, shell } = require('electron')
+const { shell } = require('electron')
 const isMac = process.platform === 'darwin'
 
 export default function (window) {
@@ -8,21 +8,39 @@ export default function (window) {
       label: 'File',
       submenu: [
         {
+          label: 'Save',
+          accelerator: 'CmdOrCtrl+S',
+          click () {
+            window.webContents.send('SAVE_FILE')
+          }
+        },
+        {
           label: 'Save As...',
           accelerator: 'CmdOrCtrl+Shift+S',
           click () {
-            dialog.showSaveDialog(window, {
-              filters: [
-                { name: 'Custom File Type', extensions: ['json'] }
-              ]
-            }).then(({ filePath }) => {
-              if (filePath) {
-                window.webContents.send('SAVE_FILE_AS', { filePath })
-              }
-            })
+            window.webContents.send('SAVE_FILE_AS')
           }
         },
         isMac ? { role: 'close' } : { role: 'quit' }
+      ]
+    },
+    {
+      label: 'Edit',
+      submenu: [
+        {
+          label: 'Undo',
+          accelerator: 'CmdOrCtrl+Z',
+          click () {
+            window.webContents.send('UNDO_HISTORY')
+          }
+        },
+        {
+          label: 'Redo',
+          accelerator: 'CmdOrCtrl+Y',
+          click () {
+            window.webContents.send('REDO_HISTORY')
+          }
+        }
       ]
     },
     {

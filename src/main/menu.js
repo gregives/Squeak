@@ -11,12 +11,15 @@ export default function (window) {
           label: 'Save As...',
           accelerator: 'CmdOrCtrl+Shift+S',
           click () {
-            const { filePath } = dialog.showSaveDialog(window, {
+            dialog.showSaveDialog(window, {
               filters: [
                 { name: 'Custom File Type', extensions: ['json'] }
               ]
+            }).then(({ filePath }) => {
+              if (filePath) {
+                window.webContents.send('SAVE_FILE_AS', { filePath })
+              }
             })
-            console.log('SAVE AT ' + filePath)
           }
         },
         isMac ? { role: 'close' } : { role: 'quit' }

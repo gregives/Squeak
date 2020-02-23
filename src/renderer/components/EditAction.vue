@@ -19,11 +19,11 @@ import ActionGoTo from '@/components/actions/GoTo'
 export default {
   computed: {
     selected () {
-      const selected = this.$store.state.Actions.selected
+      const selected = this.$store.state.actions.selected
       return selected[selected.length - 1]
     },
     action () {
-      return this.$store.state.Actions.actions[this.selected]
+      return this.$store.state.actions.actions[this.selected]
     }
   },
   components: {

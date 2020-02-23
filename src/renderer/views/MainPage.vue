@@ -19,12 +19,23 @@ import ActionTable from '@/components/ActionTable'
 import EditAction from '@/components/EditAction'
 import SelectedControls from '@/components/SelectedControls'
 
+const { ipcRenderer } = require('electron')
+const { writeFile } = require('fs')
+
 export default {
   components: {
     HeaderControls,
     ActionTable,
     EditAction,
     SelectedControls
+  },
+  created () {
+    ipcRenderer.on('SAVE_FILE_AS', (event, { filePath }) => {
+      const contents = JSON.stringify(this.$store.state.actions, null, 2)
+      writeFile(filePath, contents, (error) => {
+        console.log(error ? 'Failed to save' : 'Saved successfully')
+      })
+    })
   }
 }
 </script>

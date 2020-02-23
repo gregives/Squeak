@@ -18,7 +18,7 @@ export default {
       return { ...this.action }
     },
     selected () {
-      return this.$store.state.Actions.selected[0]
+      return this.$store.state.actions.selected[0]
     }
   },
   methods: {

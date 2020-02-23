@@ -51,10 +51,10 @@ export default {
   },
   computed: {
     selected () {
-      return this.$store.state.Actions.selected
+      return this.$store.state.actions.selected
     },
     actions () {
-      return this.$store.state.Actions.actions.map((action, index) => {
+      return this.$store.state.actions.actions.map((action, index) => {
         return {
           ...actions[action.action].methods.getTableValues(action),
           index,

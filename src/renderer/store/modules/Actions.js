@@ -1,16 +1,20 @@
 const { readFile, writeFile } = require('fs')
 
-const state = {
-  actions: [],
-  repeat: 0,
-  selected: [],
-  history: {
-    states: [],
-    index: 0,
-    saved: false
-  },
-  filePath: null
+const DEFAULT_STATE = () => {
+  return {
+    actions: [],
+    repeat: 0,
+    selected: [],
+    history: {
+      states: [],
+      index: 0,
+      saved: false
+    },
+    filePath: null
+  }
 }
+
+const state = DEFAULT_STATE()
 
 // Help function to maintain history
 const updateHistory = (state) => {
@@ -45,19 +49,12 @@ const readStateFromFile = (state, callback) => {
       return callback(error)
     }
 
-    const { actions, repeat, selected } = JSON.parse(contents)
-
-    // Set state from contents of file
-    state.actions = actions.slice()
-    state.repeat = repeat
-    state.selected = selected.slice()
+    // Set state from file
+    Object.assign(state, JSON.parse(contents))
 
     // Set new history
-    state.history = {
-      states: [],
-      index: 0,
-      saved: true
-    }
+    state.history = DEFAULT_STATE().history
+    state.history.saved = true
 
     callback(undefined)
   })
@@ -174,6 +171,10 @@ const mutations = {
       state.history.saved = false
       boundSelected(state)
     }
+  },
+  NEW_FILE (state) {
+    // Reset state to default state
+    Object.assign(state, DEFAULT_STATE())
   },
   OPEN_FILE (state, { filePath }) {
     state.filePath = filePath

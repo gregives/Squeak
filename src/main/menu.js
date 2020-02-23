@@ -8,6 +8,13 @@ export default function (window) {
       label: 'File',
       submenu: [
         {
+          label: 'New File',
+          accelerator: 'CmdOrCtrl+N',
+          click () {
+            window.webContents.send('NEW_FILE')
+          }
+        },
+        {
           label: 'Open File...',
           accelerator: 'CmdOrCtrl+O',
           click () {

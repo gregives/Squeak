@@ -35,6 +35,9 @@ export default {
     SelectedControls
   },
   created () {
+    ipcRenderer.on('NEW_FILE', (event) => {
+      this.$store.dispatch('NEW_FILE')
+    })
     ipcRenderer.on('OPEN_FILE', (event) => {
       this.OPEN_FILE()
     })

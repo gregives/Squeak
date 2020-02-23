@@ -1,4 +1,4 @@
-const { writeFile } = require('fs')
+const { readFile, writeFile } = require('fs')
 
 const state = {
   actions: [],
@@ -6,7 +6,8 @@ const state = {
   selected: [],
   history: {
     states: [],
-    index: 0
+    index: 0,
+    saved: false
   },
   filePath: null
 }
@@ -38,13 +39,41 @@ const boundSelected = (state) => {
   }
 }
 
-const saveStateToFile = (state, callback) => {
-  // Convert state to JSON
+const readStateFromFile = (state, callback) => {
+  readFile(state.filePath, { encoding: 'utf8' }, (error, contents) => {
+    if (error) {
+      return callback(error)
+    }
+
+    const { actions, repeat, selected } = JSON.parse(contents)
+
+    // Set state from contents of file
+    state.actions = actions.slice()
+    state.repeat = repeat
+    state.selected = selected.slice()
+
+    // Set new history
+    state.history = {
+      states: [],
+      index: 0,
+      saved: true
+    }
+
+    callback(undefined)
+  })
+}
+
+const writeStateToFile = (state, callback) => {
+  const { actions, repeat, selected } = state
+
+  // Convert saved state to JSON
   const contents = JSON.stringify({
-    actions: state.actions,
-    repeat: state.repeat,
-    selected: state.selected
+    actions,
+    repeat,
+    selected
   }, null, 2)
+
+  state.history.saved = true
 
   // Write state to given file path
   writeFile(state.filePath, contents, callback)
@@ -60,6 +89,7 @@ const mutations = {
     state.actions.splice(selected + 1, 0, { ...action })
     // Select new action
     state.selected = [selected + 1]
+    state.history.saved = false
     boundSelected(state)
     updateHistory(state)
   },
@@ -67,10 +97,12 @@ const mutations = {
     // Replace selected action with updated action
     const selected = state.selected[state.selected.length - 1]
     state.actions.splice(selected, 1, { ...action })
+    state.history.saved = false
     updateHistory(state)
   },
   UPDATE_REPEAT (state, { repeat }) {
     state.repeat = repeat
+    state.history.saved = false
     updateHistory(state)
   },
   DELETE_ACTION (state) {
@@ -80,6 +112,7 @@ const mutations = {
     })
     // Select position of topmost deleted action
     state.selected = [Math.min(...state.selected)]
+    state.history.saved = false
     boundSelected(state)
     updateHistory(state)
   },
@@ -97,6 +130,7 @@ const mutations = {
     }
     // Move selection up
     state.selected = state.selected.map(index => index - 1)
+    state.history.saved = false
     boundSelected(state)
     updateHistory(state)
   },
@@ -115,6 +149,7 @@ const mutations = {
     }
     // Move selection down
     state.selected = state.selected.map(index => index + 1)
+    state.history.saved = false
     boundSelected(state)
     updateHistory(state)
   },
@@ -125,6 +160,7 @@ const mutations = {
       const { actions, repeat } = state.history.states[state.history.index]
       state.actions = actions.slice()
       state.repeat = repeat
+      state.history.saved = false
       boundSelected(state)
     }
   },
@@ -135,11 +171,20 @@ const mutations = {
       const { actions, repeat } = state.history.states[state.history.index]
       state.actions = actions.slice()
       state.repeat = repeat
+      state.history.saved = false
       boundSelected(state)
     }
   },
+  OPEN_FILE (state, { filePath }) {
+    state.filePath = filePath
+    readStateFromFile(state, (error) => {
+      if (error) {
+        console.warn('Failed to read state from file')
+      }
+    })
+  },
   SAVE_FILE (state) {
-    saveStateToFile(state, (error) => {
+    writeStateToFile(state, (error) => {
       if (error) {
         console.warn('Failed to save state to file')
       }
@@ -147,7 +192,7 @@ const mutations = {
   },
   SAVE_FILE_AS (state, { filePath }) {
     state.filePath = filePath
-    saveStateToFile(state, (error) => {
+    writeStateToFile(state, (error) => {
       if (error) {
         console.warn('Failed to save state to file')
       }

@@ -29,6 +29,9 @@ export default {
     SelectedControls
   },
   created () {
+    ipcRenderer.on('OPEN_FILE', (event) => {
+      this.OPEN_FILE()
+    })
     ipcRenderer.on('SAVE_FILE', (event) => {
       if (this.$store.state.actions.filePath !== null) {
         this.$store.dispatch('SAVE_FILE')
@@ -47,13 +50,30 @@ export default {
     })
   },
   methods: {
+    OPEN_FILE () {
+      remote.dialog.showOpenDialog(remote.getCurrentWindow(), {
+        filters: [
+          { name: 'Custom File Type', extensions: ['json'] }
+        ]
+      }).then(({ filePaths }) => {
+        if (filePaths[0]) {
+          this.$store.dispatch('OPEN_FILE', { filePath: filePaths[0] })
+        } else {
+          console.warn('No file selected')
+        }
+      })
+    },
     SAVE_FILE_AS () {
       remote.dialog.showSaveDialog(remote.getCurrentWindow(), {
         filters: [
           { name: 'Custom File Type', extensions: ['json'] }
         ]
       }).then(({ filePath }) => {
-        this.$store.dispatch('SAVE_FILE_AS', { filePath })
+        if (filePath) {
+          this.$store.dispatch('SAVE_FILE_AS', { filePath })
+        } else {
+          console.warn('No file selected')
+        }
       })
     }
   }

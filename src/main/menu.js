@@ -8,6 +8,13 @@ export default function (window) {
       label: 'File',
       submenu: [
         {
+          label: 'Open File...',
+          accelerator: 'CmdOrCtrl+O',
+          click () {
+            window.webContents.send('OPEN_FILE')
+          }
+        },
+        {
           label: 'Save',
           accelerator: 'CmdOrCtrl+S',
           click () {

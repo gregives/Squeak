@@ -14,6 +14,16 @@
       class="mb-0"
       @row-clicked="rowClicked"
     ></b-table>
+    <template v-slot:footer>
+      <b-row class="text-muted">
+        <b-col>
+          {{ actions.length }} actions, {{ selected.length }} selected
+        </b-col>
+        <b-col class="text-right">
+          {{ $store.state.actions.history.saved ? 'All changes saved' : 'Unsaved changes' }}
+        </b-col>
+      </b-row>
+    </template>
   </b-card>
 </template>
 

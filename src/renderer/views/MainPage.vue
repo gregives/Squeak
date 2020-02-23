@@ -22,6 +22,12 @@ import SelectedControls from '@/components/SelectedControls'
 const { ipcRenderer, remote } = require('electron')
 
 export default {
+  metaInfo () {
+    return {
+      title: this.$store.state.actions.filePath || 'Untitled',
+      titleTemplate: '%s - AutoClicker'
+    }
+  },
   components: {
     HeaderControls,
     ActionTable,

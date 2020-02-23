@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import VueMeta from 'vue-meta'
 import axios from 'axios'
 
 import BootstrapVue from 'bootstrap-vue'
@@ -21,6 +22,7 @@ library.add(
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
+Vue.use(VueMeta)
 Vue.use(BootstrapVue)
 
 if (!process.env.IS_WEB) Vue.use(require('vue-electron'))

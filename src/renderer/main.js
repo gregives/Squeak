@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueMeta from 'vue-meta'
-import axios from 'axios'
 
 import BootstrapVue from 'bootstrap-vue'
 import './assets/sass/custom.sass'
@@ -26,7 +25,6 @@ Vue.use(VueMeta)
 Vue.use(BootstrapVue)
 
 if (!process.env.IS_WEB) Vue.use(require('vue-electron'))
-Vue.http = Vue.prototype.$http = axios
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

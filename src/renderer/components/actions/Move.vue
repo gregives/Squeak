@@ -75,7 +75,7 @@ export default {
           x: 0,
           y: 0
         },
-        random: true,
+        random: false,
         secondPosition: {
           x: 0,
           y: 0

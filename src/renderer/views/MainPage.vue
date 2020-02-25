@@ -1,5 +1,5 @@
 <template>
-  <b-container class="d-flex flex-column vh-100" fluid>
+  <b-container class="main-page d-flex flex-column" fluid>
     <header-controls class="flex-shrink-0"></header-controls>
     <b-row class="flex-grow-1">
       <b-col class="d-flex flex-column pr-0" cols="8">
@@ -20,11 +20,17 @@ import EditAction from '@/components/EditAction'
 import SelectedControls from '@/components/SelectedControls'
 
 const { ipcRenderer, remote } = require('electron')
+const { basename } = require('path')
+const customTitleBar = require('custom-electron-titlebar')
+
+const titleBar = new customTitleBar.Titlebar({
+  backgroundColor: customTitleBar.Color.fromHex('#3C3C3C')
+})
 
 export default {
   metaInfo () {
     return {
-      title: this.$store.state.actions.filePath || 'Untitled',
+      title: this.title,
       titleTemplate: '%s - AutoClicker'
     }
   },
@@ -34,7 +40,28 @@ export default {
     EditAction,
     SelectedControls
   },
+  data () {
+    return {
+      titleBar
+    }
+  },
+  computed: {
+    title () {
+      const filePath = this.$store.state.actions.filePath
+      if (filePath === null) {
+        return 'Untitled'
+      } else {
+        return basename(filePath)
+      }
+    }
+  },
+  watch: {
+    title () {
+      this.updateTitle()
+    }
+  },
   created () {
+    this.updateTitle()
     ipcRenderer.on('NEW_FILE', (event) => {
       this.$store.dispatch('NEW_FILE')
     })
@@ -59,6 +86,9 @@ export default {
     })
   },
   methods: {
+    updateTitle () {
+      this.titleBar.updateTitle(`${this.title || 'Untitled'} - AutoClicker`)
+    },
     OPEN_FILE () {
       remote.dialog.showOpenDialog(remote.getCurrentWindow(), {
         filters: [
@@ -88,3 +118,12 @@ export default {
   }
 }
 </script>
+
+<style lang="sass">
+.main-page
+  height: calc(100vh - 30px)
+
+// Styles of custom titlebar
+.menubar-menu-container .menu-item-icon
+  margin: 0
+</style>

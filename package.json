@@ -74,6 +74,7 @@
     "axios": "^0.18.0",
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.5.0",
+    "custom-electron-titlebar": "^3.2.2-hotfix62",
     "iohook": "^0.6.5",
     "robotjs": "^0.6.0",
     "vue": "^2.6.10",

@@ -22,6 +22,9 @@ export default function (window) {
           }
         },
         {
+          type: 'separator'
+        },
+        {
           label: 'Save',
           accelerator: 'CmdOrCtrl+S',
           click () {

@@ -3,12 +3,21 @@
     <b-table
       hover
       bordered
+      fixed
       :fields="fields"
       :items="actions"
       sticky-header="100%"
       class="mb-0"
       @row-clicked="rowClicked"
-    ></b-table>
+    >
+      <template v-slot:table-colgroup="scope">
+        <col
+          v-for="field in scope.fields"
+          :key="field.key"
+          :style="{ width: `${field.width}%` }"
+        >
+      </template>
+    </b-table>
     <template v-slot:footer>
       <b-row class="text-muted">
         <b-col>
@@ -43,13 +52,16 @@ export default {
       fields: [
         {
           key: 'index',
-          label: '#'
+          label: '#',
+          width: 10
         },
         {
-          key: 'action'
+          key: 'action',
+          width: 20
         },
         {
-          key: 'value'
+          key: 'value',
+          width: 70
         }
       ]
     }

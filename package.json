@@ -16,7 +16,7 @@
     "pack:main": "cross-env NODE_ENV=production webpack --progress --colors --config .electron-vue/webpack.main.config.js",
     "pack:renderer": "cross-env NODE_ENV=production webpack --progress --colors --config .electron-vue/webpack.renderer.config.js",
     "postinstall": "npm run lint:fix",
-    "rebuild": "npm rebuild --runtime=electron --target=8.0.1 --disturl=https://atom.io/download/atom-shell --abi=57"
+    "rebuild": "npm rebuild --runtime=electron --target=8.0.1 --disturl=https://atom.io/download/atom-shell --abi=64"
   },
   "iohook": {
     "targets": [

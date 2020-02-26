@@ -22,7 +22,8 @@ const { basename } = require('path')
 const customTitleBar = require('custom-electron-titlebar')
 
 const titleBar = new customTitleBar.Titlebar({
-  backgroundColor: customTitleBar.Color.fromHex('#3C3C3C')
+  backgroundColor: customTitleBar.Color.fromHex('#3C3C3C'),
+  icon: require('@/assets/images/24x24.png')
 })
 
 export default {
@@ -122,6 +123,10 @@ export default {
   height: calc(100vh - 30px)
 
 // Styles of custom titlebar
-.menubar-menu-container .menu-item-icon
-  margin: 0
+.menubar-menu-container
+  .action-menu-item
+    height: 2.15em
+
+  .menu-item-icon
+    margin: 0
 </style>

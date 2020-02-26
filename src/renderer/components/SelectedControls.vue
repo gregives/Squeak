@@ -1,11 +1,11 @@
 <template>
-  <div class="clearfix">
-    <div class="float-left">
+  <div class="d-flex flex-wrap justify-content-between px-3">
+    <div class="mr-4 mt-3">
       <b-input-group prepend="Repeat" append="times">
-        <b-form-input type="number" number :step="1" :value="repeat" @input="updateRepeat"></b-form-input>
+        <b-form-input type="number" number :step="1" :min="0" :value="repeat" @input="updateRepeat"></b-form-input>
       </b-input-group>
     </div>
-    <div class="float-right">
+    <div class="flex-shrink-0 my-3">
       <b-button-toolbar key-nav aria-label="Toolbar with button groups">
         <b-button-group class="mr-2">
           <b-button @click="moveActionUp">

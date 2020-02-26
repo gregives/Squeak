@@ -1,10 +1,5 @@
 <template>
-  <b-card
-    no-body
-    class="d-flex flex-column shadow-sm mb-4"
-    :footer="`${actions.length} actions, ${selected.length} selected`"
-    footer-class="text-muted"
-  >
+  <b-card no-body class="d-flex flex-column border-right-0" footer-class="p-3">
     <b-table
       hover
       bordered
@@ -115,9 +110,6 @@ export default {
   flex: 1 1 0
   overflow-y: scroll
 
-  ~ .card-footer
-    padding: 0.75rem
-
 .b-table
   border: 0 !important
   user-select: none
@@ -139,6 +131,7 @@ export default {
   td:first-child,
   th:first-child
     border-left: 0 !important
+    padding-left: 1rem !important
 
   td:last-child,
   th:last-child

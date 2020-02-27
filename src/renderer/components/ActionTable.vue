@@ -1,5 +1,5 @@
 <template>
-  <b-card no-body class="d-flex flex-column border-right-0" footer-class="p-3">
+  <div class="d-flex flex-column border-top">
     <b-table
       hover
       bordered
@@ -18,17 +18,15 @@
         >
       </template>
     </b-table>
-    <template v-slot:footer>
-      <b-row class="text-muted">
-        <b-col>
-          {{ actions.length }} actions, {{ selected.length }} selected
-        </b-col>
-        <b-col class="text-right">
-          {{ $store.state.actions.history.saved ? 'All changes saved' : 'Unsaved changes' }}
-        </b-col>
-      </b-row>
-    </template>
-  </b-card>
+    <b-row class="bg-light border-top text-muted p-3">
+      <b-col>
+        {{ actions.length }} actions, {{ selected.length }} selected
+      </b-col>
+      <b-col class="text-right">
+        {{ $store.state.actions.history.saved ? 'All changes saved' : 'Unsaved changes' }}
+      </b-col>
+    </b-row>
+  </div>
 </template>
 
 <script>

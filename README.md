@@ -1,6 +1,6 @@
-# autoclicker
+# Squeak
 
-> An open-source auto clicker.
+> An open-source mouse recorder and desktop automation software.
 
 #### Build Setup
 

@@ -66,7 +66,7 @@ export default function (window) {
         {
           label: 'Learn More',
           click () {
-            return shell.openExternal('https://github.com/gregives/AutoClicker')
+            return shell.openExternal('https://github.com/gregives/Squeak')
           }
         }
       ]

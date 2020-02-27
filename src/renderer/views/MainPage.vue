@@ -30,7 +30,7 @@ export default {
   metaInfo () {
     return {
       title: this.title,
-      titleTemplate: '%s - AutoClicker'
+      titleTemplate: '%s - Squeak'
     }
   },
   components: {
@@ -90,7 +90,7 @@ export default {
   },
   methods: {
     updateTitle () {
-      this.titleBar.updateTitle(`${this.title || 'Untitled'} - AutoClicker`)
+      this.titleBar.updateTitle(`${this.title || 'Untitled'} - Squeak`)
     },
     confirmUnsavedChanges (callback) {
       // If there are no unsaved changes
@@ -107,7 +107,7 @@ export default {
           'Don\'t Save',
           'Cancel'
         ],
-        title: 'AutoClicker',
+        title: 'Squeak',
         message: `Do you want to save the changes you made to ${this.title}?`,
         details: 'Your changes will be lost if you don\'t save them.',
         noLink: true

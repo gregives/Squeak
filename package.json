@@ -1,8 +1,8 @@
 {
-  "name": "autoclicker",
+  "name": "squeak",
   "version": "0.0.1",
-  "author": "Greg Ives <gregives774@gmail.com>",
-  "description": "An open-source auto clicker.",
+  "author": "Greg Ives <greg@gregives.co.uk>",
+  "description": "An open-source mouse recorder and desktop automation software.",
   "main": "./dist/electron/main.js",
   "scripts": {
     "build": "node .electron-vue/build.js && electron-builder",
@@ -34,8 +34,8 @@
     ]
   },
   "build": {
-    "productName": "autoclicker",
-    "appId": "com.gregives.autoclicker",
+    "productName": "squeak",
+    "appId": "com.gregives.squeak",
     "directories": {
       "output": "build"
     },

@@ -13,14 +13,21 @@ import createMenu from './menu'
 
   // Start playback from Vue
   ipcMain.on('START_PLAYBACK', (event, actions, index, repeat) => {
-    // Minimize window
-    BrowserWindow.getFocusedWindow().minimize()
+    let nextAction = actions[index]
+
+    // Early return if action doesn't exist
+    if (nextAction === undefined) {
+      return
+    }
 
     // Set playing to true
     playing = true
     repeat += 1
 
-    let nextAction = actions[index]
+    // Minimize window
+    BrowserWindow.getFocusedWindow().minimize()
+
+    // Function of first action
     let actionFunction = actionFunctions[nextAction.action]
 
     actionFunction(nextAction, function finishedPlay (goTo) {
@@ -63,18 +70,17 @@ const winURL = process.env.NODE_ENV === 'development'
   : `file://${__dirname}/index.html`
 
 function createWindow () {
-  /**
-   * Initial window options
-   */
+  // Create window
   mainWindow = new BrowserWindow({
     frame: false,
-    height: 563,
-    width: 1000,
+    minWidth: 500,
+    minHeight: 400,
     webPreferences: {
       nodeIntegration: true
     }
   })
 
+  // Set application menu from template
   Menu.setApplicationMenu(Menu.buildFromTemplate(createMenu(mainWindow)))
   mainWindow.loadURL(winURL)
 

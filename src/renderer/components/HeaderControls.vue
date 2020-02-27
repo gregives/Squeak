@@ -1,27 +1,29 @@
 <template>
-  <div class="header-controls border-bottom overflow-auto text-nowrap">
-    <div class="d-inline-block border-right position-relative p-3 pb-4">
+  <div class="header-controls border-bottom d-flex flex-row flex-nowrap">
+    <div class="flex-shrink-0 border-right position-relative p-3 pb-4">
       <b-dropdown split text="Play" variant="success" class="mr-2" @click="startPlayback">
         <b-dropdown-item @click="startPlaybackSelected">Play from selected</b-dropdown-item>
       </b-dropdown>
       <b-button variant="info" @click="pausePlayback">Stop</b-button>
     </div>
-    <div class="d-inline-block border-right position-relative p-3 pb-4">
-      <b-button @click="addClick">Click</b-button>
-      <b-button @click="addMove">Move</b-button>
-      <small class="position-absolute text-muted bottom-left text-center mb-1 w-100">
-        Mouse
-      </small>
-    </div>
-    <div class="d-inline-block border-right position-relative p-3 pb-4">
-      <b-button @click="addWait">Wait</b-button>
-      <b-button @click="addPixel">Pixel</b-button>
-      <small class="position-absolute text-muted bottom-left text-center mb-1 w-100">
-        Wait
-      </small>
-    </div>
-    <div class="d-inline-block border-right position-relative p-3 pb-4">
-      <b-button @click="addGoTo">Go to</b-button>
+    <div class="overflow-auto text-nowrap">
+      <div class="d-inline-block border-right position-relative p-3 pb-4">
+        <b-button @click="addClick">Click</b-button>
+        <b-button @click="addMove">Move</b-button>
+        <small class="position-absolute text-muted bottom-left text-center mb-1 w-100">
+          Mouse
+        </small>
+      </div>
+      <div class="d-inline-block border-right position-relative p-3 pb-4">
+        <b-button @click="addWait">Wait</b-button>
+        <b-button @click="addPixel">Pixel</b-button>
+        <small class="position-absolute text-muted bottom-left text-center mb-1 w-100">
+          Wait
+        </small>
+      </div>
+      <div class="d-inline-block border-right position-relative p-3 pb-4">
+        <b-button @click="addGoTo">Go to</b-button>
+      </div>
     </div>
   </div>
 </template>

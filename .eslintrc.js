@@ -14,5 +14,8 @@ module.exports = {
   },
   plugins: [
     'html'
-  ]
+  ],
+  rules: {
+    'standard/no-callback-literal': 0
+  }
 }

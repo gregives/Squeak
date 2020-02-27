@@ -62,17 +62,21 @@ export default {
   created () {
     this.updateTitle()
     ipcRenderer.on('NEW_FILE', (event) => {
-      this.$store.dispatch('NEW_FILE')
+      this.confirmUnsavedChanges((response) => {
+        if (response) {
+          this.$store.dispatch('NEW_FILE')
+        }
+      })
     })
     ipcRenderer.on('OPEN_FILE', (event) => {
-      this.OPEN_FILE()
+      this.confirmUnsavedChanges((response) => {
+        if (response) {
+          this.OPEN_FILE()
+        }
+      })
     })
     ipcRenderer.on('SAVE_FILE', (event) => {
-      if (this.$store.state.actions.filePath !== null) {
-        this.$store.dispatch('SAVE_FILE')
-      } else {
-        this.SAVE_FILE_AS()
-      }
+      this.SAVE_FILE()
     })
     ipcRenderer.on('SAVE_FILE_AS', (event) => {
       this.SAVE_FILE_AS()
@@ -88,6 +92,35 @@ export default {
     updateTitle () {
       this.titleBar.updateTitle(`${this.title || 'Untitled'} - AutoClicker`)
     },
+    confirmUnsavedChanges (callback) {
+      // If there are no unsaved changes
+      if (this.$store.state.actions.history.saved || this.$store.state.actions.history.states.length === 0) {
+        callback(true)
+        return
+      }
+
+      // Show unsaved changes confirmation dialog
+      remote.dialog.showMessageBox(remote.getCurrentWindow(), {
+        type: 'warning',
+        buttons: [
+          'Save',
+          'Don\'t Save',
+          'Cancel'
+        ],
+        title: 'AutoClicker',
+        message: `Do you want to save the changes you made to ${this.title}?`,
+        details: 'Your changes will be lost if you don\'t save them.',
+        noLink: true
+      }).then(({ response }) => {
+        if (response === 0) {
+          this.SAVE_FILE(() => {
+            callback(response !== 2)
+          })
+        } else {
+          callback(response !== 2)
+        }
+      })
+    },
     OPEN_FILE () {
       remote.dialog.showOpenDialog(remote.getCurrentWindow(), {
         filters: [
@@ -101,7 +134,15 @@ export default {
         }
       })
     },
-    SAVE_FILE_AS () {
+    SAVE_FILE (callback) {
+      if (this.$store.state.actions.filePath !== null) {
+        this.$store.dispatch('SAVE_FILE')
+        callback()
+      } else {
+        this.SAVE_FILE_AS(callback)
+      }
+    },
+    SAVE_FILE_AS (callback) {
       remote.dialog.showSaveDialog(remote.getCurrentWindow(), {
         filters: [
           { name: 'Custom File Type', extensions: ['json'] }
@@ -109,6 +150,7 @@ export default {
       }).then(({ filePath }) => {
         if (filePath) {
           this.$store.dispatch('SAVE_FILE_AS', { filePath })
+          callback()
         } else {
           console.warn('No file selected')
         }

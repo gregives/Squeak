@@ -10,7 +10,8 @@ const DEFAULT_STATE = () => {
       index: 0,
       saved: false
     },
-    filePath: null
+    filePath: null,
+    clipboard: []
   }
 }
 
@@ -82,10 +83,10 @@ const mutations = {
   },
   CREATE_ACTION (state, { action }) {
     // Create action succeeding selected action, or at start
-    const selected = state.selected.length > 0 ? state.selected[state.selected.length - 1] : -1
-    state.actions.splice(selected + 1, 0, { ...action })
+    const selected = state.selected.length > 0 ? state.selected[state.selected.length - 1] + 1 : 0
+    state.actions.splice(selected, 0, { ...action })
     // Select new action
-    state.selected = [selected + 1]
+    state.selected = [selected]
     state.history.saved = false
     boundSelected(state)
     updateHistory(state)
@@ -150,28 +151,6 @@ const mutations = {
     boundSelected(state)
     updateHistory(state)
   },
-  UNDO_HISTORY (state) {
-    // If there are previous states
-    if (state.history.index > 0) {
-      state.history.index -= 1
-      const { actions, repeat } = state.history.states[state.history.index]
-      state.actions = actions.slice()
-      state.repeat = repeat
-      state.history.saved = false
-      boundSelected(state)
-    }
-  },
-  REDO_HISTORY (state) {
-    // If there are future states
-    if (state.history.index < state.history.states.length - 1) {
-      state.history.index += 1
-      const { actions, repeat } = state.history.states[state.history.index]
-      state.actions = actions.slice()
-      state.repeat = repeat
-      state.history.saved = false
-      boundSelected(state)
-    }
-  },
   NEW_FILE (state) {
     // Reset state to default state
     Object.assign(state, DEFAULT_STATE())
@@ -198,6 +177,39 @@ const mutations = {
         console.warn('Failed to save state to file')
       }
     })
+  },
+  UNDO_HISTORY (state) {
+    // If there are previous states
+    if (state.history.index > 0) {
+      state.history.index -= 1
+      const { actions, repeat } = state.history.states[state.history.index]
+      state.actions = actions.slice()
+      state.repeat = repeat
+      state.history.saved = false
+      boundSelected(state)
+    }
+  },
+  REDO_HISTORY (state) {
+    // If there are future states
+    if (state.history.index < state.history.states.length - 1) {
+      state.history.index += 1
+      const { actions, repeat } = state.history.states[state.history.index]
+      state.actions = actions.slice()
+      state.repeat = repeat
+      state.history.saved = false
+      boundSelected(state)
+    }
+  },
+  COPY_ACTION (state) {
+    state.clipboard = state.actions.filter((_action, index) => {
+      return state.selected.includes(index)
+    }).slice()
+  },
+  PASTE_ACTION (state) {
+    const selected = state.selected.length > 0 ? state.selected[state.selected.length - 1] + 1 : 0
+    state.actions.splice(selected, 0, ...state.clipboard.slice())
+    state.selected = [...Array(state.clipboard.length).keys()].map((index) => index + selected)
+    updateHistory(state)
   }
 }
 

@@ -20,6 +20,7 @@ import SelectedControls from '@/components/SelectedControls'
 const { ipcRenderer, remote } = require('electron')
 const { basename } = require('path')
 const customTitleBar = require('custom-electron-titlebar')
+const mousetrap = require('mousetrap')
 
 const titleBar = new customTitleBar.Titlebar({
   backgroundColor: customTitleBar.Color.fromHex('#3C3C3C'),
@@ -87,6 +88,16 @@ export default {
     ipcRenderer.on('REDO_HISTORY', (event) => {
       this.$store.dispatch('REDO_HISTORY')
     })
+
+    // Clipboard shortcuts
+    ipcRenderer.on('CUT_ACTION', this.CUT_ACTION)
+    ipcRenderer.on('COPY_ACTION', this.COPY_ACTION)
+    ipcRenderer.on('PASTE_ACTION', this.PASTE_ACTION)
+
+    // Handle keyboard shortcuts which Chrome overrides
+    mousetrap.bind(['command+x', 'ctrl+x'], this.CUT_ACTION)
+    mousetrap.bind(['command+c', 'ctrl+c'], this.COPY_ACTION)
+    mousetrap.bind(['command+v', 'ctrl+v'], this.PASTE_ACTION)
   },
   methods: {
     updateTitle () {
@@ -155,6 +166,19 @@ export default {
           console.warn('No file selected')
         }
       })
+    },
+    CUT_ACTION () {
+      this.$store.dispatch('COPY_ACTION')
+      this.$store.dispatch('DELETE_ACTION')
+      return false
+    },
+    COPY_ACTION () {
+      this.$store.dispatch('COPY_ACTION')
+      return false
+    },
+    PASTE_ACTION () {
+      this.$store.dispatch('PASTE_ACTION')
+      return false
     }
   }
 }

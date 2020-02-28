@@ -57,6 +57,30 @@ export default function (window) {
           click () {
             window.webContents.send('REDO_HISTORY')
           }
+        },
+        {
+          type: 'separator'
+        },
+        {
+          label: 'Cut',
+          accelerator: 'CmdOrCtrl+X',
+          click () {
+            window.webContents.send('CUT_ACTION')
+          }
+        },
+        {
+          label: 'Copy',
+          accelerator: 'CmdOrCtrl+C',
+          click () {
+            window.webContents.send('COPY_ACTION')
+          }
+        },
+        {
+          label: 'Paste',
+          accelerator: 'CmdOrCtrl+V',
+          click () {
+            window.webContents.send('PASTE_ACTION')
+          }
         }
       ]
     },

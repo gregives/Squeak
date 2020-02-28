@@ -62,6 +62,8 @@ export default {
   },
   created () {
     this.updateTitle()
+
+    // TODO: Refactor all commands out of created()
     ipcRenderer.on('NEW_FILE', (event) => {
       this.confirmUnsavedChanges((response) => {
         if (response) {
@@ -89,15 +91,17 @@ export default {
       this.$store.dispatch('REDO_HISTORY')
     })
 
-    // Clipboard shortcuts
+    // Keyboard shortcuts which Chrome overrides
     ipcRenderer.on('CUT_ACTION', this.CUT_ACTION)
     ipcRenderer.on('COPY_ACTION', this.COPY_ACTION)
     ipcRenderer.on('PASTE_ACTION', this.PASTE_ACTION)
+    ipcRenderer.on('SELECT_ALL', this.SELECT_ALL)
 
-    // Handle keyboard shortcuts which Chrome overrides
+    // Also handle using mousetrap
     mousetrap.bind(['command+x', 'ctrl+x'], this.CUT_ACTION)
     mousetrap.bind(['command+c', 'ctrl+c'], this.COPY_ACTION)
     mousetrap.bind(['command+v', 'ctrl+v'], this.PASTE_ACTION)
+    mousetrap.bind(['command+a', 'ctrl+a'], this.SELECT_ALL)
   },
   methods: {
     updateTitle () {
@@ -105,6 +109,7 @@ export default {
     },
     confirmUnsavedChanges (callback) {
       // If there are no unsaved changes
+      // TODO: Also check if history has been undone
       if (this.$store.state.actions.history.saved || this.$store.state.actions.history.states.length === 0) {
         callback(true)
         return
@@ -180,6 +185,10 @@ export default {
     },
     PASTE_ACTION () {
       this.$store.dispatch('PASTE_ACTION')
+      return false
+    },
+    SELECT_ALL () {
+      this.$store.dispatch('SELECT_ALL')
       return false
     }
   }

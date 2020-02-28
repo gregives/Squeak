@@ -85,6 +85,18 @@ export default function (window) {
       ]
     },
     {
+      label: 'Selection',
+      submenu: [
+        {
+          label: 'Select All',
+          accelerator: 'CmdOrCtrl+A',
+          click () {
+            window.webContents.send('SELECT_ALL')
+          }
+        }
+      ]
+    },
+    {
       role: 'help',
       submenu: [
         {

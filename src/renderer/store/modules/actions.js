@@ -210,6 +210,9 @@ const mutations = {
     state.actions.splice(selected, 0, ...state.clipboard.slice())
     state.selected = [...Array(state.clipboard.length).keys()].map((index) => index + selected)
     updateHistory(state)
+  },
+  SELECT_ALL (state) {
+    state.selected = [...Array(state.actions.length).keys()]
   }
 }
 

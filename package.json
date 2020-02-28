@@ -34,8 +34,8 @@
     ]
   },
   "build": {
-    "productName": "squeak",
-    "appId": "com.gregives.squeak",
+    "appId": "uk.co.gregives.squeak",
+    "productName": "Squeak",
     "directories": {
       "output": "build"
     },

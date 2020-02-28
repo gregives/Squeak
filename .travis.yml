@@ -6,6 +6,7 @@ node_js: 10
 branches:
   only:
   - master
+  - /^v\d+\.\d+\.\d+$/
 
 script:
   - npm run build

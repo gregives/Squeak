@@ -134,6 +134,7 @@ export default {
     },
     OPEN_FILE () {
       remote.dialog.showOpenDialog(remote.getCurrentWindow(), {
+        defaultPath: remote.app.getPath('documents'),
         filters: [
           { name: 'Custom File Type', extensions: ['json'] }
         ]
@@ -155,6 +156,7 @@ export default {
     },
     SAVE_FILE_AS (callback) {
       remote.dialog.showSaveDialog(remote.getCurrentWindow(), {
+        defaultPath: remote.app.getPath('documents'),
         filters: [
           { name: 'Custom File Type', extensions: ['json'] }
         ]

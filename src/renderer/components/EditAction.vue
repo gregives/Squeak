@@ -1,5 +1,5 @@
 <template>
-  <b-card class="edit-action h-100">
+  <b-card class="edit-action h-100 border-top-0 border-right-0 border-bottom-0">
     <div slot="header">
       Edit Action
       <strong v-if="selected !== undefined">#{{ selected + 1 }}</strong>
@@ -35,3 +35,12 @@ export default {
   }
 }
 </script>
+
+<style lang="sass">
+.edit-action .card-body
+  flex: 1 1 0
+  overflow-y: auto
+
+  .form-group:last-child
+    margin-bottom: 0
+</style>

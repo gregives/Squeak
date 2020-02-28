@@ -1,14 +1,16 @@
 <template>
-  <b-row no-gutters class="main-page">
-    <b-col class="d-flex flex-column" cols="8">
-      <header-controls class="flex-shrink-0"></header-controls>
-      <selected-controls></selected-controls>
-      <action-table class="flex-grow-1"></action-table>
-    </b-col>
-    <b-col cols="4">
-      <edit-action></edit-action>
-    </b-col>
-  </b-row>
+  <main class="main-page d-flex flex-column">
+    <header-controls class="flex-shrink-0"></header-controls>
+    <b-row no-gutters class="flex-grow-1">
+      <b-col cols="8" class="d-flex flex-column">
+        <selected-controls></selected-controls>
+        <action-table class="flex-grow-1"></action-table>
+      </b-col>
+      <b-col cols="4">
+        <edit-action></edit-action>
+      </b-col>
+    </b-row>
+  </main>
 </template>
 
 <script>

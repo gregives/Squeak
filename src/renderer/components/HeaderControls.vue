@@ -5,19 +5,22 @@
         <b-dropdown-item @click="startPlaybackSelected">Play from selected</b-dropdown-item>
       </b-dropdown>
       <b-button variant="info" @click="pausePlayback">Stop</b-button>
+      <small class="position-absolute text-muted bottom-left text-center w-100">
+        Playback
+      </small>
     </div>
     <div class="overflow-auto text-nowrap">
       <div class="d-inline-block border-right position-relative p-3 pb-4">
         <b-button @click="addClick">Click</b-button>
         <b-button @click="addMove">Move</b-button>
-        <small class="position-absolute text-muted bottom-left text-center mb-1 w-100">
+        <small class="position-absolute text-muted bottom-left text-center w-100">
           Mouse
         </small>
       </div>
       <div class="d-inline-block border-right position-relative p-3 pb-4">
         <b-button @click="addWait">Wait</b-button>
         <b-button @click="addPixel">Pixel</b-button>
-        <small class="position-absolute text-muted bottom-left text-center mb-1 w-100">
+        <small class="position-absolute text-muted bottom-left text-center w-100">
           Wait
         </small>
       </div>

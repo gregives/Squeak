@@ -2,7 +2,7 @@
 
 <br>
 
-> An open-source mouse recorder and desktop automation software.
+> An open-source mouse recorder and desktop automation software
 
 Squeak is an electron app for desktop automation, including controlling the mouse, keyboard input, waiting for a period of time or until a pixel changes colour and more.
 
@@ -27,6 +27,7 @@ If you have any feature requests, please create an issue and I will add it to th
 - [ ] Record input from mouse and keyboard
 - [ ] Switching applications
 - [ ] Hotkeys e.g. for cancelling playback
+- [ ] Set up Travis for Linux and Mac builds
 - [ ] Some tests would be good!
 
 ## Development

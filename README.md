@@ -1,23 +1,41 @@
-# Squeak
+![Squeak logo](assets/banner.png)
 
 > An open-source mouse recorder and desktop automation software.
 
-#### Build Setup
+Squeak is an electron app for desktop automation, including controlling the mouse, keyboard input, waiting for a period of time or until a pixel changes colour and more.
+
+In theory, Squeak is built for **Windows, Linux and Mac**; behind the scenes, Squeak uses [robotjs](https://github.com/octalmage/robotjs) and [iohook](https://github.com/wilix-team/iohook).
+
+## Roadmap
+
+If you have any feature requests, please create an issue and I will add it to the roadmap. Or you could make a pull request!
+
+- [ ] Keyboard output (raw keystrokes)
+- [ ] Text output (arbitrary string with randomness)
+- [ ] Scroll output
+- [ ] Abstract actions into single file modules
+- [ ] Recent files
+- [ ] Wait for image on screen
+- [ ] Playback speed
+- [ ] Record input from mouse and keyboard
+- [ ] Switching applications
+- [ ] Hotkeys e.g. for cancelling playback
+- [ ] Some tests would be good!
+
+## Development
 
 ``` bash
-# install dependencies
+# Install dependencies
 npm install
 
-# serve with hot reload at localhost:9080
+# Serve with hot reload at localhost:9080
 npm run dev
 
-# build electron application for production
+# Build electron application for production
 npm run build
 
-
-# lint all JS/Vue component files in `src/`
+# Lint all JS/Vue component files in `src/`
 npm run lint
-
 ```
 
 ---

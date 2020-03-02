@@ -6,7 +6,9 @@
 
 Squeak is an electron app for desktop automation, including controlling the mouse, keyboard input, waiting for a period of time or until a pixel changes colour and more.
 
-In theory, Squeak is built for **Windows, Linux and Mac**; behind the scenes, Squeak uses [robotjs](https://github.com/octalmage/robotjs) and [iohook](https://github.com/wilix-team/iohook).
+[![Download for Windows](https://img.shields.io/static/v1?label&message=Download%20for%20Windows&logo=windows&style=for-the-badge&color=0078D6)](https://github.com/gregives/Squeak/releases/tag/v1.0.0-alpha)
+
+In theory, Squeak is built for **Windows, Linux and Mac** as it uses [robotjs](https://github.com/octalmage/robotjs) and [iohook](https://github.com/wilix-team/iohook)), however, I have only tested Squeak on Windows at the time of writing.
 
 <br>
 

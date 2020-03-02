@@ -1,10 +1,14 @@
 ![Squeak logo](assets/banner.png)
 
+<br>
+
 > An open-source mouse recorder and desktop automation software.
 
 Squeak is an electron app for desktop automation, including controlling the mouse, keyboard input, waiting for a period of time or until a pixel changes colour and more.
 
 In theory, Squeak is built for **Windows, Linux and Mac**; behind the scenes, Squeak uses [robotjs](https://github.com/octalmage/robotjs) and [iohook](https://github.com/wilix-team/iohook).
+
+<br>
 
 ![Screenshot of Squeak](assets/screenshot.png)
 
@@ -16,6 +20,7 @@ If you have any feature requests, please create an issue and I will add it to th
 - [ ] Text output (arbitrary string with randomness)
 - [ ] Scroll output
 - [ ] Abstract actions into single file modules
+- [ ] Multiple monitor support
 - [ ] Recent files
 - [ ] Wait for image on screen
 - [ ] Playback speed

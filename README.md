@@ -6,6 +6,8 @@ Squeak is an electron app for desktop automation, including controlling the mous
 
 In theory, Squeak is built for **Windows, Linux and Mac**; behind the scenes, Squeak uses [robotjs](https://github.com/octalmage/robotjs) and [iohook](https://github.com/wilix-team/iohook).
 
+![Screenshot of Squeak](assets/screenshot.png)
+
 ## Roadmap
 
 If you have any feature requests, please create an issue and I will add it to the roadmap. Or you could make a pull request!

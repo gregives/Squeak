@@ -1,6 +1,6 @@
 {
   "name": "squeak",
-  "version": "0.0.1",
+  "version": "1.0.0-alpha",
   "author": "Greg Ives <greg@gregives.co.uk>",
   "description": "An open-source mouse recorder and desktop automation software.",
   "main": "./dist/electron/main.js",

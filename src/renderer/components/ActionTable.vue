@@ -31,17 +31,19 @@
 
 <script>
 import ActionClick from '@/components/actions/Click'
-import ActionGoTo from '@/components/actions/GoTo'
 import ActionMove from '@/components/actions/Move'
+import ActionKey from '@/components/actions/Key'
+import ActionGoTo from '@/components/actions/GoTo'
 import ActionPixel from '@/components/actions/Pixel'
 import ActionWait from '@/components/actions/Wait'
 
 const actions = {
   click: ActionClick,
-  goTo: ActionGoTo,
   move: ActionMove,
+  key: ActionKey,
+  wait: ActionWait,
   pixel: ActionPixel,
-  wait: ActionWait
+  goTo: ActionGoTo
 }
 
 export default {

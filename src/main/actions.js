@@ -71,10 +71,20 @@ function goTo (action, callback) {
   callback(action.goTo)
 }
 
+function key (action, callback) {
+  if (action.type === 'press') {
+    robot.keyTap(action.key)
+  } else {
+    robot.keyToggle(action.key, action.type)
+  }
+  callback()
+}
+
 export default {
   click,
   move,
   pixel,
   wait,
-  goTo
+  goTo,
+  key
 }

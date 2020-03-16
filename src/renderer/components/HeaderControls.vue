@@ -18,6 +18,12 @@
         </small>
       </div>
       <div class="d-inline-block border-right position-relative p-3 pb-4">
+        <b-button @click="addKey">Key</b-button>
+        <small class="position-absolute text-muted bottom-left text-center w-100">
+          Keyboard
+        </small>
+      </div>
+      <div class="d-inline-block border-right position-relative p-3 pb-4">
         <b-button @click="addWait">Wait</b-button>
         <b-button @click="addPixel">Pixel</b-button>
         <small class="position-absolute text-muted bottom-left text-center w-100">
@@ -34,6 +40,7 @@
 <script>
 import ActionClick from '@/components/actions/Click'
 import ActionMove from '@/components/actions/Move'
+import ActionKey from '@/components/actions/Key'
 import ActionPixel from '@/components/actions/Pixel'
 import ActionWait from '@/components/actions/Wait'
 import ActionGoTo from '@/components/actions/GoTo'
@@ -62,6 +69,11 @@ export default {
     addMove () {
       this.$store.dispatch('CREATE_ACTION', {
         action: ActionMove.methods.defaultAction()
+      })
+    },
+    addKey () {
+      this.$store.dispatch('CREATE_ACTION', {
+        action: ActionKey.methods.defaultAction()
       })
     },
     addPixel () {

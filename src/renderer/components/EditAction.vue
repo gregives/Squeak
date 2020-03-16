@@ -12,6 +12,7 @@
 <script>
 import ActionClick from '@/components/actions/Click'
 import ActionMove from '@/components/actions/Move'
+import ActionKey from '@/components/actions/Key'
 import ActionPixel from '@/components/actions/Pixel'
 import ActionWait from '@/components/actions/Wait'
 import ActionGoTo from '@/components/actions/GoTo'
@@ -29,6 +30,7 @@ export default {
   components: {
     ActionClick,
     ActionMove,
+    ActionKey,
     ActionPixel,
     ActionWait,
     ActionGoTo

@@ -43,6 +43,6 @@ export default {
   flex: 1 1 0
   overflow-y: auto
 
-  .form-group:last-child
+  > form > .form-group:last-child
     margin-bottom: 0
 </style>

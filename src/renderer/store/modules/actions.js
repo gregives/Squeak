@@ -3,7 +3,7 @@ const { readFile, writeFile } = require('fs')
 const DEFAULT_STATE = () => {
   return {
     actions: [],
-    repeat: 0,
+    repeat: 1,
     selected: [],
     history: {
       states: [],

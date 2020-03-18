@@ -111,8 +111,7 @@ export default {
     },
     confirmUnsavedChanges (callback) {
       // If there are no unsaved changes
-      // TODO: Also check if history has been undone
-      if (this.$store.state.actions.history.saved || this.$store.state.actions.history.states.length === 0) {
+      if (this.$store.state.actions.history.saved) {
         callback(true)
         return
       }

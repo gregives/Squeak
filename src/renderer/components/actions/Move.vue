@@ -96,6 +96,35 @@ export default {
       this.$store.dispatch('UPDATE_ACTION', {
         action: this.editAction
       })
+    },
+    actionFunction (action, robot, callback) {
+      const endPosition = {
+        x: Math.floor(Math.random() *
+          (action.firstPosition.x - action.secondPosition.x + 1)) + action.secondPosition.x,
+        y: Math.floor(Math.random() *
+          (action.firstPosition.y - action.secondPosition.y + 1)) + action.secondPosition.y
+      }
+
+      if (action.duration === 0) {
+        robot.moveMouse(endPosition.x, endPosition.y)
+        callback()
+      } else {
+        const startPosition = robot.getMousePos()
+        let startTimestamp
+        requestAnimationFrame(function moveMouse (timestamp) {
+          startTimestamp = startTimestamp || timestamp
+          const ratio = (timestamp - startTimestamp) / action.duration
+          if (ratio < 1) {
+            const x = (endPosition.x - startPosition.x) * ratio + startPosition.x
+            const y = (endPosition.y - startPosition.y) * ratio + startPosition.y
+            robot.moveMouse(x, y)
+            requestAnimationFrame(moveMouse.bind(action))
+          } else {
+            robot.moveMouse(endPosition.x, endPosition.y)
+            callback()
+          }
+        })
+      }
     }
   }
 }

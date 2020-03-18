@@ -47,6 +47,14 @@ export default {
       this.$store.dispatch('UPDATE_ACTION', {
         action: this.editAction
       })
+    },
+    actionFunction (action, robot, callback) {
+      if (action.type === 'single' || action.type === 'double') {
+        robot.mouseClick(action.button, action.type === 'double')
+      } else {
+        robot.mouseToggle(action.type, action.button)
+      }
+      callback()
     }
   }
 }

@@ -44,6 +44,14 @@ export default {
       this.$store.dispatch('UPDATE_ACTION', {
         action: this.editAction
       })
+    },
+    actionFunction (action, robot, callback) {
+      if (action.type === 'press') {
+        robot.keyTap(action.key)
+      } else {
+        robot.keyToggle(action.key, action.type)
+      }
+      callback()
     }
   }
 }

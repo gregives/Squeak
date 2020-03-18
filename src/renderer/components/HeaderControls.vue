@@ -1,13 +1,7 @@
 <template>
   <div class="header-controls border-bottom d-flex flex-row flex-nowrap">
     <div class="flex-shrink-0 border-right position-relative p-3 pb-4">
-      <b-dropdown split text="Play" variant="success" class="mr-2" @click="startPlayback">
-        <b-dropdown-item @click="startPlaybackSelected">Play from selected</b-dropdown-item>
-      </b-dropdown>
-      <b-button variant="info" @click="pausePlayback">Stop</b-button>
-      <small class="position-absolute text-muted bottom-left text-center w-100">
-        Playback
-      </small>
+      <playback-controls />
     </div>
     <div class="overflow-auto text-nowrap">
       <div class="d-inline-block border-right position-relative p-3 pb-4">
@@ -38,6 +32,8 @@
 </template>
 
 <script>
+import PlaybackControls from '@/components/PlaybackControls'
+
 import ActionClick from '@/components/actions/Click'
 import ActionMove from '@/components/actions/Move'
 import ActionKey from '@/components/actions/Key'
@@ -45,20 +41,9 @@ import ActionPixel from '@/components/actions/Pixel'
 import ActionWait from '@/components/actions/Wait'
 import ActionGoTo from '@/components/actions/GoTo'
 
-const { ipcRenderer } = require('electron')
-
 export default {
-  computed: {
-    repeat () {
-      return this.$store.state.actions.repeat
-    },
-    selected () {
-      const selected = this.$store.state.actions.selected
-      return selected[selected.length - 1]
-    },
-    actions () {
-      return this.$store.state.actions.actions
-    }
+  components: {
+    PlaybackControls
   },
   methods: {
     addClick () {
@@ -90,15 +75,6 @@ export default {
       this.$store.dispatch('CREATE_ACTION', {
         action: ActionGoTo.methods.defaultAction()
       })
-    },
-    startPlayback () {
-      ipcRenderer.send('START_PLAYBACK', this.actions, 0, this.repeat)
-    },
-    startPlaybackSelected () {
-      ipcRenderer.send('START_PLAYBACK', this.actions, this.selected, this.repeat)
-    },
-    pausePlayback () {
-      this.$store.dispatch('PAUSE_PLAYBACK')
     }
   }
 }

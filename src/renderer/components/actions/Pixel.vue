@@ -93,6 +93,24 @@ export default {
       this.$store.dispatch('UPDATE_ACTION', {
         action: this.editAction
       })
+    },
+    actionFunction (action, robot, callback) {
+      let timeout = false
+      setTimeout(function () {
+        timeout = true
+      }, action.timeout)
+
+      const intervalID = setInterval(function () {
+        const currentColor = '#' + robot.getPixelColor(action.position.x, action.position.y)
+        if (currentColor === action.color || timeout) {
+          clearInterval(intervalID)
+          if (timeout) {
+            callback(action.afterTimeout)
+          } else {
+            callback()
+          }
+        }
+      }, action.polling)
     }
   }
 }

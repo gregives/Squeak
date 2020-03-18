@@ -1,8 +1,8 @@
 <template>
-  <div class="d-flex flex-wrap justify-content-between px-3">
+  <div class="d-flex justify-content-between px-3">
     <div class="mr-4 mt-3">
-      <b-input-group prepend="Repeat" append="times">
-        <b-form-input type="number" number :step="1" :min="0" :value="repeat" @input="updateRepeat" @change="validateRepeat"></b-form-input>
+      <b-input-group append="times">
+        <b-form-input type="number" number :step="1" :min="1" :value="repeat" @input="updateRepeat" @change="validateRepeat"></b-form-input>
       </b-input-group>
     </div>
     <div class="flex-shrink-0 my-3">
@@ -47,7 +47,7 @@ export default {
     },
     validateRepeat (repeat) {
       return this.$store.dispatch('UPDATE_REPEAT', {
-        repeat: Math.max(parseInt(repeat) || 0, 0)
+        repeat: Math.max(parseInt(repeat) || 1, 1)
       })
     },
     deleteAction () {

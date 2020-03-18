@@ -41,6 +41,10 @@ export default {
       this.$store.dispatch('UPDATE_ACTION', {
         action: this.editAction
       })
+    },
+    actionFunction (action, robot, callback) {
+      const waitFor = action.wait + Math.random() * action.random
+      setTimeout(callback, waitFor)
     }
   }
 }

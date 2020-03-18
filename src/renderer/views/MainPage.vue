@@ -111,7 +111,7 @@ export default {
     },
     confirmUnsavedChanges (callback) {
       // If there are no unsaved changes
-      if (this.$store.state.actions.history.saved) {
+      if (this.$store.state.actions.history.saved || this.$store.state.actions.history.index === 0) {
         callback(true)
         return
       }

@@ -154,12 +154,15 @@ const mutations = {
   NEW_FILE (state) {
     // Reset state to default state
     Object.assign(state, DEFAULT_STATE())
+    updateHistory(state)
   },
   OPEN_FILE (state, { filePath }) {
     state.filePath = filePath
     readStateFromFile(state, (error) => {
       if (error) {
         console.warn('Failed to read state from file')
+      } else {
+        updateHistory(state)
       }
     })
   },

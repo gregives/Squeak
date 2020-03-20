@@ -4,15 +4,20 @@
     <b-form-group label="Color">
       <b-form-input v-model="editAction.color" type="color" @input="updateAction"></b-form-input>
     </b-form-group>
+    <b-form-group label="Threshold">
+      <b-input-group append="%">
+        <b-form-input v-model="editAction.threshold" type="number" number :min="0" :max="100" :step="1" @input="updateAction"></b-form-input>
+      </b-input-group>
+    </b-form-group>
     <b-row>
       <b-col>
         <b-form-group label="X position">
-          <b-form-input v-model="editAction.position.x" type="number" number :step="1" @input="updateAction"></b-form-input>
+          <b-form-input v-model="editAction.position.x" type="number" number :min="0" :step="1" @input="updateAction"></b-form-input>
         </b-form-group>
       </b-col>
       <b-col>
         <b-form-group label="Y position">
-          <b-form-input v-model="editAction.position.y" type="number" number :step="1" @input="updateAction"></b-form-input>
+          <b-form-input v-model="editAction.position.y" type="number" number :min="0" :step="1" @input="updateAction"></b-form-input>
         </b-form-group>
       </b-col>
     </b-row>
@@ -78,9 +83,10 @@ export default {
           y: 0
         },
         color: '#000000',
+        threshold: 90,
         polling: 100,
         timeout: 10000,
-        afterTimeout: 0
+        afterTimeout: 1
       }
     },
     getTableValues (action) {
@@ -102,9 +108,28 @@ export default {
         timeout = true
       }, action.timeout)
 
+      // Convert hex #aabbcc to rgb
+      const hexToRGB = (hexColor) => {
+        return {
+          R: parseInt(hexColor.slice(1, 3), 16),
+          G: parseInt(hexColor.slice(3, 5), 16),
+          B: parseInt(hexColor.slice(5, 6), 16)
+        }
+      }
+
+      // Difference between 2 colours
+      // TODO: Improve this function, maybe use LAB space?
+      const differenceBetweenColors = (color1, color2) => {
+        return (Math.abs(color1.R - color2.R) + Math.abs(color1.G - color2.G) + Math.abs(color1.B - color2.B)) / 765
+      }
+
+      const actionColorRGB = hexToRGB(action.color)
+
       const intervalID = setInterval(function () {
         const currentColor = '#' + robot.getPixelColor(action.position.x, action.position.y)
-        if (currentColor === action.color || timeout) {
+        const currentColorRGB = hexToRGB(currentColor)
+
+        if (differenceBetweenColors(currentColorRGB, actionColorRGB) <= (action.threshold / 100) || timeout) {
           clearInterval(intervalID)
           if (timeout) {
             callback(action.afterTimeout)

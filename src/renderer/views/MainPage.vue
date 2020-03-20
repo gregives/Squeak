@@ -207,4 +207,8 @@ export default {
 
   .menu-item-icon
     margin: 0
+
+// Disable user selection
+*
+  user-select: none
 </style>

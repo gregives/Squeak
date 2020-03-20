@@ -2,7 +2,7 @@
   <b-card class="edit-action h-100 border-top-0 border-right-0 border-bottom-0">
     <div slot="header">
       Edit Action
-      <strong v-if="selected !== undefined">#{{ selected }}</strong>
+      <strong v-if="selected !== undefined">#{{ selected + 1 }}</strong>
     </div>
     <component :is="action ? `action-${action.action}` : null" :action="action"></component>
     <b-card-text v-if="selected === undefined">Select or create an action.</b-card-text>

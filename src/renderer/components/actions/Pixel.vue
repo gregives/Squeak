@@ -61,6 +61,8 @@ export default {
             this.editAction.position.x = secondEvent.x
             this.editAction.position.y = secondEvent.y
             this.editAction.color = '#' + color
+            this.updateAction()
+
             ioHook._events = []
             ioHook._eventsCount = 0
             ioHook.enableClickPropagation()

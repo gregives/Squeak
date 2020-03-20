@@ -74,7 +74,7 @@ export default {
       return this.$store.state.actions.actions.map((action, index) => {
         return {
           ...actions[action.action].methods.getTableValues(action),
-          index,
+          index: index + 1,
           _rowVariant: this.selected.includes(index) ? 'primary' : null
         }
       })
@@ -125,6 +125,10 @@ export default {
 .b-table
   border: 0 !important
   user-select: none
+
+  th
+    border-bottom: none !important
+    box-shadow: 0 2px #dee2e6
 
   td
     cursor: pointer

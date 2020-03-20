@@ -61,6 +61,8 @@ export default {
             this.editAction.secondPosition.y = secondEvent.y
             this.editAction.random = this.editAction.firstPosition.x !== this.editAction.secondPosition.x ||
               this.editAction.firstPosition.y !== this.editAction.secondPosition.y
+            this.updateAction()
+
             ioHook._events = []
             ioHook._eventsCount = 0
             ioHook.enableClickPropagation()

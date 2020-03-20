@@ -47,7 +47,7 @@ function startPlayback (actions, actionFunctions, index, repeat) {
       actionFunction = actionFunctions[nextAction.action]
 
       // Play the next action
-      actionFunction(nextAction, finishedPlay)
+      actionFunction(nextAction, robot, finishedPlay)
     }
   })
 }

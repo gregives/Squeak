@@ -18,10 +18,10 @@ In theory, Squeak is built for **Windows, Linux and Mac** as it uses [robotjs](h
 
 If you have any feature requests, please create an issue and I will add it to the roadmap. Or you could make a pull request!
 
-- [ ] Keyboard output (raw keystrokes)
+- [x] Keyboard output (raw keystrokes)
 - [ ] Text output (arbitrary string with randomness)
 - [ ] Scroll output
-- [ ] Abstract actions into single file modules
+- [x] Abstract actions into single file modules
 - [ ] Multiple monitor support
 - [ ] Recent files
 - [ ] Wait for image on screen

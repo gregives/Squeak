@@ -65,7 +65,15 @@
     },
     "linux": {
       "icon": "build/icons"
-    }
+    },
+    "fileAssociations": [
+      {
+        "ext": "squeak",
+        "name": "Squeak File",
+        "role": "Editor",
+        "perMachine": true
+      }
+    ]
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.19",

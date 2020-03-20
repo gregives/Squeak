@@ -53,7 +53,7 @@ export default {
       if (filePath === null) {
         return 'Untitled'
       } else {
-        return basename(filePath)
+        return basename(filePath, '.squeak')
       }
     }
   },
@@ -142,7 +142,7 @@ export default {
       remote.dialog.showOpenDialog(remote.getCurrentWindow(), {
         defaultPath: remote.app.getPath('documents'),
         filters: [
-          { name: 'Custom File Type', extensions: ['json'] }
+          { name: 'Custom File Type', extensions: ['squeak'] }
         ]
       }).then(({ filePaths }) => {
         if (filePaths[0]) {
@@ -164,7 +164,7 @@ export default {
       remote.dialog.showSaveDialog(remote.getCurrentWindow(), {
         defaultPath: remote.app.getPath('documents'),
         filters: [
-          { name: 'Custom File Type', extensions: ['json'] }
+          { name: 'Custom File Type', extensions: ['squeak'] }
         ]
       }).then(({ filePath }) => {
         if (filePath) {

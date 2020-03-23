@@ -3,6 +3,7 @@ const { readFile, writeFile } = require('fs')
 const DEFAULT_STATE = () => {
   return {
     actions: [],
+    playing: -1,
     repeat: 1,
     selected: [],
     history: {
@@ -216,6 +217,12 @@ const mutations = {
   },
   SELECT_ALL (state) {
     state.selected = [...Array(state.actions.length).keys()]
+  },
+  PLAYBACK_ACTION (state, { index }) {
+    state.playing = index
+  },
+  PLAYBACK_FINISHED (state) {
+    state.playing = -1
   }
 }
 

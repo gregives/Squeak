@@ -8,7 +8,7 @@ global.requestAnimationFrame = function (callback) {
 
 let playing = false
 
-function startPlayback (actions, actionFunctions, index, repeat) {
+function startPlayback (actions, actionFunctions, index, repeat, window) {
   // Parse action functions
   Object.keys(actionFunctions).map((action) => {
     // eslint-disable-next-line no-new-func
@@ -31,6 +31,7 @@ function startPlayback (actions, actionFunctions, index, repeat) {
 
   // Function of first action
   let actionFunction = actionFunctions[nextAction.action]
+  window.webContents.send('PLAYBACK_ACTION', index)
 
   actionFunction(nextAction, robot, function finishedPlay (goTo) {
     // Get next action index
@@ -45,18 +46,22 @@ function startPlayback (actions, actionFunctions, index, repeat) {
       // Next action and its function
       nextAction = actions[index]
       actionFunction = actionFunctions[nextAction.action]
+      window.webContents.send('PLAYBACK_ACTION', index)
 
       // Play the next action
       actionFunction(nextAction, robot, finishedPlay)
+    } else {
+      window.webContents.send('PLAYBACK_FINISHED')
     }
   })
 }
 
-function pausePlayback () {
+function stopPlayback (window) {
   playing = false
+  window.webContents.send('PLAYBACK_FINISHED')
 }
 
 export {
   startPlayback,
-  pausePlayback
+  stopPlayback
 }

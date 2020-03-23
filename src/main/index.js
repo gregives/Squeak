@@ -2,12 +2,8 @@
 
 import { app, BrowserWindow, ipcMain, Menu } from 'electron'
 
-import createMenu from './menu'
-import { startPlayback, pausePlayback } from './playback'
-
-// Playback controls from renderer
-ipcMain.on('START_PLAYBACK', (_event, ...args) => startPlayback(...args))
-ipcMain.on('PAUSE_PLAYBACK', (_event, ...args) => pausePlayback(...args))
+import { createMenu } from './menu'
+import { startPlayback, stopPlayback } from './playback'
 
 /**
  * Set `__static` path to static files in production
@@ -36,6 +32,10 @@ function createWindow () {
   // Set application menu from template
   Menu.setApplicationMenu(Menu.buildFromTemplate(createMenu(mainWindow)))
   mainWindow.loadURL(winURL)
+
+  // Playback controls from renderer
+  ipcMain.on('START_PLAYBACK', (_event, ...args) => startPlayback(...args, mainWindow))
+  ipcMain.on('STOP_PLAYBACK', (_event, ...args) => stopPlayback(...args, mainWindow))
 
   mainWindow.on('closed', () => {
     mainWindow = null

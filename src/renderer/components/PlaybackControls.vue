@@ -1,9 +1,9 @@
 <template>
   <div>
-    <b-dropdown split text="Play" variant="success" class="mr-2" @click="startPlayback">
+    <b-dropdown split text="Play" variant="success" class="mr-2" @click="startPlayback" :disabled="playing || !actions.length">
       <b-dropdown-item @click="startPlaybackSelected">Play from selected</b-dropdown-item>
     </b-dropdown>
-    <b-button variant="info" @click="pausePlayback">Stop</b-button>
+    <b-button variant="danger" @click="stopPlayback" :disabled="!playing">Stop</b-button>
     <small class="position-absolute text-muted bottom-left text-center w-100">Playback</small>
   </div>
 </template>
@@ -38,6 +38,9 @@ export default {
     },
     actions () {
       return this.$store.state.actions.actions
+    },
+    playing () {
+      return this.$store.state.actions.playing >= 0
     }
   },
   methods: {
@@ -47,9 +50,18 @@ export default {
     startPlaybackSelected () {
       ipcRenderer.send('START_PLAYBACK', this.actions, actionFunctions, this.selected, this.repeat)
     },
-    pausePlayback () {
-      ipcRenderer.send('PAUSE_PLAYBACK')
+    stopPlayback () {
+      ipcRenderer.send('STOP_PLAYBACK')
     }
+  },
+  created () {
+    ipcRenderer.on('PLAYBACK_ACTION', (event, index) => {
+      this.$store.dispatch('PLAYBACK_ACTION', { index })
+    })
+
+    ipcRenderer.on('PLAYBACK_FINISHED', (event) => {
+      this.$store.dispatch('PLAYBACK_FINISHED')
+    })
   }
 }
 </script>

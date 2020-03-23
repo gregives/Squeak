@@ -67,6 +67,9 @@ export default {
     }
   },
   computed: {
+    playing () {
+      return this.$store.state.actions.playing
+    },
     selected () {
       return this.$store.state.actions.selected
     },
@@ -75,12 +78,15 @@ export default {
         return {
           ...actions[action.action].methods.getTableValues(action),
           index: index + 1,
-          _rowVariant: this.selected.includes(index) ? 'primary' : null
+          _rowVariant: this.rowVariant(index)
         }
       })
     }
   },
   methods: {
+    rowVariant (row) {
+      return this.playing === row ? 'success' : this.selected.includes(row) ? 'primary' : null
+    },
     rowClicked (action, clicked, event) {
       if (event.shiftKey) {
         const selected = this.selected[this.selected.length - 1]

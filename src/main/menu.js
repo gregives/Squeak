@@ -1,7 +1,7 @@
 const { shell } = require('electron')
 const isMac = process.platform === 'darwin'
 
-export default function (window) {
+function createMenu (window) {
   return [
     ...(isMac ? [{ role: 'appMenu' }] : []),
     {
@@ -108,4 +108,8 @@ export default function (window) {
       ]
     }
   ]
+}
+
+export {
+  createMenu
 }

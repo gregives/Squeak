@@ -77,7 +77,7 @@ export default {
     },
     defaultAction () {
       return {
-        action: 'pixel',
+        action: 'Pixel',
         position: {
           x: 0,
           y: 0
@@ -89,13 +89,9 @@ export default {
         afterTimeout: 1
       }
     },
-    getTableValues (action) {
+    getTableValue (action) {
       const position = `[${action.position.x}, ${action.position.y}]`
-
-      return {
-        action: 'Pixel',
-        value: `Color ${action.color}, ${position}, poll ${action.polling}ms, timeout ${action.timeout}ms, #${action.afterTimeout}`
-      }
+      return `Color ${action.color}, ${position}, poll ${action.polling}ms, timeout ${action.timeout}ms, #${action.afterTimeout}`
     },
     updateAction () {
       this.$store.dispatch('UPDATE_ACTION', {

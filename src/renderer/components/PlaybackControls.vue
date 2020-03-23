@@ -9,23 +9,14 @@
 </template>
 
 <script>
-import ActionClick from '@/components/actions/Click'
-import ActionMove from '@/components/actions/Move'
-import ActionKey from '@/components/actions/Key'
-import ActionGoTo from '@/components/actions/GoTo'
-import ActionPixel from '@/components/actions/Pixel'
-import ActionWait from '@/components/actions/Wait'
-
-const actionFunctions = {
-  click: ActionClick.methods.actionFunction.toString(),
-  move: ActionMove.methods.actionFunction.toString(),
-  key: ActionKey.methods.actionFunction.toString(),
-  wait: ActionWait.methods.actionFunction.toString(),
-  pixel: ActionPixel.methods.actionFunction.toString(),
-  goTo: ActionGoTo.methods.actionFunction.toString()
-}
+import actions from '@/components/actions'
 
 const { ipcRenderer } = require('electron')
+
+const actionFunctions = Object.keys(actions).reduce((actionFunctions, action) => {
+  actionFunctions[action] = actions[action].methods.actionFunction.toString()
+  return actionFunctions
+}, {})
 
 export default {
   computed: {

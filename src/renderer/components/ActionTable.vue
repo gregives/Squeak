@@ -30,21 +30,7 @@
 </template>
 
 <script>
-import ActionClick from '@/components/actions/Click'
-import ActionMove from '@/components/actions/Move'
-import ActionKey from '@/components/actions/Key'
-import ActionGoTo from '@/components/actions/GoTo'
-import ActionPixel from '@/components/actions/Pixel'
-import ActionWait from '@/components/actions/Wait'
-
-const actions = {
-  click: ActionClick,
-  move: ActionMove,
-  key: ActionKey,
-  wait: ActionWait,
-  pixel: ActionPixel,
-  goTo: ActionGoTo
-}
+import actions from '@/components/actions'
 
 export default {
   data () {
@@ -76,7 +62,8 @@ export default {
     actions () {
       return this.$store.state.actions.actions.map((action, index) => {
         return {
-          ...actions[action.action].methods.getTableValues(action),
+          action: action.action.replace(/(.)([A-Z])/g, (_, $1, $2) => `${$1} ${$2.toLowerCase()}`),
+          value: actions[action.action].methods.getTableValue(action),
           index: index + 1,
           _rowVariant: this.rowVariant(index)
         }

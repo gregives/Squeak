@@ -31,17 +31,14 @@ export default {
   methods: {
     defaultAction () {
       return {
-        action: 'click',
+        action: 'Click',
         button: 'left',
         type: 'single'
       }
     },
-    getTableValues (action) {
+    getTableValue (action) {
       const toTitleCase = (string) => string.charAt(0).toUpperCase() + string.substr(1)
-      return {
-        action: 'Click',
-        value: `${toTitleCase(action.type)} ${action.button} click`
-      }
+      return `${toTitleCase(action.type)} ${action.button} click`
     },
     updateAction () {
       this.$store.dispatch('UPDATE_ACTION', {

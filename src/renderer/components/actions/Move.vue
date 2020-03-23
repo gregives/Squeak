@@ -72,7 +72,7 @@ export default {
     },
     defaultAction () {
       return {
-        action: 'move',
+        action: 'Move',
         firstPosition: {
           x: 0,
           y: 0
@@ -85,14 +85,10 @@ export default {
         duration: 0
       }
     },
-    getTableValues (action) {
+    getTableValue (action) {
       const firstPosition = `[${action.firstPosition.x}, ${action.firstPosition.y}]`
       const secondPosition = `[${action.secondPosition.x}, ${action.secondPosition.y}]`
-
-      return {
-        action: 'Move',
-        value: `${firstPosition}${action.random ? ` to ${secondPosition}` : ''}, ${action.duration}ms`
-      }
+      return `${firstPosition}${action.random ? ` to ${secondPosition}` : ''}, ${action.duration}ms`
     },
     updateAction () {
       this.$store.dispatch('UPDATE_ACTION', {

@@ -27,18 +27,14 @@ export default {
   methods: {
     defaultAction () {
       return {
-        action: 'key',
+        action: 'Key',
         type: 'press',
         key: 'enter'
       }
     },
-    getTableValues (action) {
+    getTableValue (action) {
       const type = action.type === 'press' ? 'Press' : `Key ${action.type}`
-
-      return {
-        action: 'Key',
-        value: `${type} ${action.key}`
-      }
+      return `${type} ${action.key}`
     },
     updateAction () {
       this.$store.dispatch('UPDATE_ACTION', {

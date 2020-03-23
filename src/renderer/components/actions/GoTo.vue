@@ -24,15 +24,12 @@ export default {
   methods: {
     defaultAction () {
       return {
-        action: 'goTo',
+        action: 'GoTo',
         goTo: 0
       }
     },
-    getTableValues (action) {
-      return {
-        action: 'Go to',
-        value: `Action #${action.goTo}`
-      }
+    getTableValue (action) {
+      return `Action #${action.goTo}`
     },
     updateAction () {
       this.$store.dispatch('UPDATE_ACTION', {

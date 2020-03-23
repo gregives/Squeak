@@ -10,12 +10,7 @@
 </template>
 
 <script>
-import ActionClick from '@/components/actions/Click'
-import ActionMove from '@/components/actions/Move'
-import ActionKey from '@/components/actions/Key'
-import ActionPixel from '@/components/actions/Pixel'
-import ActionWait from '@/components/actions/Wait'
-import ActionGoTo from '@/components/actions/GoTo'
+import actions from '@/components/actions'
 
 export default {
   computed: {
@@ -27,14 +22,7 @@ export default {
       return this.$store.state.actions.actions[this.selected]
     }
   },
-  components: {
-    ActionClick,
-    ActionMove,
-    ActionKey,
-    ActionPixel,
-    ActionWait,
-    ActionGoTo
-  }
+  components: actions
 }
 </script>
 

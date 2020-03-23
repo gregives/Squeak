@@ -26,16 +26,13 @@ export default {
   methods: {
     defaultAction () {
       return {
-        action: 'wait',
+        action: 'Wait',
         wait: 1000,
         random: 1000
       }
     },
-    getTableValues (action) {
-      return {
-        action: 'Wait',
-        value: `Wait ${action.wait}ms${action.random ? ` to ${(action.wait + action.random)}ms` : ''}`
-      }
+    getTableValue (action) {
+      return `Wait ${action.wait}ms${action.random ? ` to ${(action.wait + action.random)}ms` : ''}`
     },
     updateAction () {
       this.$store.dispatch('UPDATE_ACTION', {

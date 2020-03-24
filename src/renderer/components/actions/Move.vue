@@ -53,8 +53,8 @@ export default {
       ioHook.start()
       ioHook.disableClickPropagation()
       this.$nextTick(() => {
-        ioHook.on('mousedown', firstEvent => {
-          ioHook.on('mouseup', secondEvent => {
+        ioHook.on('mousedown', (firstEvent) => {
+          ioHook.on('mouseup', (secondEvent) => {
             this.editAction.firstPosition.x = firstEvent.x
             this.editAction.firstPosition.y = firstEvent.y
             this.editAction.secondPosition.x = secondEvent.x
@@ -63,9 +63,8 @@ export default {
               this.editAction.firstPosition.y !== this.editAction.secondPosition.y
             this.updateAction()
 
-            ioHook._events = []
-            ioHook._eventsCount = 0
             ioHook.enableClickPropagation()
+            ioHook.removeAllListeners()
           })
         })
       })

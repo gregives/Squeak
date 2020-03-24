@@ -60,18 +60,15 @@ export default {
       ioHook.start()
       ioHook.disableClickPropagation()
       this.$nextTick(() => {
-        ioHook.on('mousedown', firstEvent => {
-          ioHook.on('mouseup', secondEvent => {
-            const color = robot.getPixelColor(secondEvent.x, secondEvent.y)
-            this.editAction.position.x = secondEvent.x
-            this.editAction.position.y = secondEvent.y
-            this.editAction.color = '#' + color
-            this.updateAction()
+        ioHook.on('mouseup', (event) => {
+          const color = robot.getPixelColor(event.x, event.y)
+          this.editAction.position.x = event.x
+          this.editAction.position.y = event.y
+          this.editAction.color = '#' + color
+          this.updateAction()
 
-            ioHook._events = []
-            ioHook._eventsCount = 0
-            ioHook.enableClickPropagation()
-          })
+          ioHook.enableClickPropagation()
+          ioHook.removeAllListeners()
         })
       })
     },

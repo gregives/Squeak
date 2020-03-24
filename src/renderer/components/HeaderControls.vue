@@ -13,6 +13,7 @@
       </div>
       <div class="d-inline-block border-right position-relative p-3 pb-4">
         <b-button @click="createAction('Key')">Key</b-button>
+        <b-button @click="createAction('Type')">Type</b-button>
         <small class="position-absolute text-muted bottom-left text-center w-100">
           Keyboard
         </small>
